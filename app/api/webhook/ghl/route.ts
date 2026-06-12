@@ -7,24 +7,30 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
   }
 
-  const body = await req.json()
-  const { name, phone, email, score, lead_class, agency_id, cap, estimated_value, ghl_contact_id } = body
+  const rawBody = await req.json()
+
+  // GHL invia i custom data dentro "customData" — uniamo i due livelli
+  const body = { ...rawBody, ...(rawBody.customData || {}) }
+
+  const { name, phone, email, score, lead_class, agency_id, cap, estimated_value, ghl_contact_id, property_type, size_sqm, address, city } = body
 
   if (!name || !phone || !ghl_contact_id) {
+    console.error('Missing fields. Received:', JSON.stringify(rawBody))
     return NextResponse.json({ error: 'Missing required fields' }, { status: 400 })
   }
 
-  // Normalizza lead_class — accetta sia "A" che "lead a"
-  let normalizedClass = lead_class
+  // Normalizza lead_class — accetta "A", "lead a", o tag multipli "lead a, altro"
+  let normalizedClass = ''
   if (typeof lead_class === 'string') {
-    const lower = lead_class.toLowerCase().trim()
-    if (lower.includes('a')) normalizedClass = 'A'
-    else if (lower.includes('b')) normalizedClass = 'B'
-    else if (lower.includes('c')) normalizedClass = 'C'
+    const lower = lead_class.toLowerCase()
+    if (lower.includes('lead a') || lower.trim() === 'a') normalizedClass = 'A'
+    else if (lower.includes('lead b') || lower.trim() === 'b') normalizedClass = 'B'
+    else if (lower.includes('lead c') || lower.trim() === 'c') normalizedClass = 'C'
   }
 
   if (!['A','B','C'].includes(normalizedClass)) {
-    return NextResponse.json({ error: 'Invalid lead_class' }, { status: 400 })
+    console.error('Invalid lead_class. Received:', lead_class)
+    return NextResponse.json({ error: 'Invalid lead_class', received: lead_class }, { status: 400 })
   }
 
   const { data, error } = await supabaseAdmin
@@ -38,6 +44,10 @@ export async function POST(req: NextRequest) {
         lead_class: normalizedClass,
         agency_id: agency_id || null,
         cap,
+        city: city || 'torino',
+        address,
+        property_type,
+        size_sqm: size_sqm ? parseInt(size_sqm) : null,
         estimated_value: estimated_value ? parseFloat(estimated_value) : null,
         ghl_contact_id,
         status: 'new',
