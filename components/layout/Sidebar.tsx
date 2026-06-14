@@ -11,20 +11,21 @@ interface SidebarProps {
 }
 
 const agentLinks = [
-  { href: '/dashboard', label: 'Dashboard', icon: '▪' },
-  { href: '/dashboard/leads', label: 'I miei lead', icon: '▪' },
-  { href: '/dashboard/critical', label: 'Lead critici', icon: '▪' },
-  { href: '/dashboard/history', label: 'Storico', icon: '▪' },
-  { href: '/dashboard/performance', label: 'Performance', icon: '▪' },
+  { href: '/dashboard', label: 'Dashboard' },
+  { href: '/dashboard/leads', label: 'I miei lead' },
+  { href: '/dashboard/critical', label: 'Lead critici' },
+  { href: '/dashboard/history', label: 'Storico' },
+  { href: '/dashboard/performance', label: 'Performance' },
 ]
 
 const founderLinks = [
-  { href: '/founder', label: 'Dashboard', icon: '▪' },
-  { href: '/founder/leads', label: 'Tutti i lead', icon: '▪' },
-  { href: '/founder/critical', label: 'Lead critici', icon: '▪' },
-  { href: '/founder/agencies', label: 'Agenzie', icon: '▪' },
-  { href: '/founder/funnel', label: 'Funnel', icon: '▪' },
-  { href: '/founder/settings', label: 'Impostazioni', icon: '▪' },
+  { href: '/founder', label: 'Dashboard' },
+  { href: '/founder/leads', label: 'Tutti i lead' },
+  { href: '/founder/critical', label: 'Lead critici' },
+  { href: '/founder/agencies', label: 'Agenzie' },
+  { href: '/founder/billing', label: 'Fatturazione' },
+  { href: '/founder/funnel', label: 'Funnel' },
+  { href: '/founder/settings', label: 'Impostazioni' },
 ]
 
 export default function Sidebar({ role, agencyName }: SidebarProps) {
@@ -39,8 +40,6 @@ export default function Sidebar({ role, agencyName }: SidebarProps) {
 
   return (
     <aside className="fixed left-0 top-0 h-screen w-56 flex flex-col border-r" style={{ backgroundColor: '#16161F', borderColor: '#1E293B', borderWidth: '0.5px' }}>
-      
-      {/* Logo */}
       <div className="px-5 py-6 border-b" style={{ borderColor: '#1E293B', borderWidth: '0.5px' }}>
         <h1 className="text-base font-bold text-white tracking-tight">AXIONHub</h1>
         <p className="text-xs mt-0.5" style={{ color: '#CBD5E1' }}>
@@ -48,7 +47,6 @@ export default function Sidebar({ role, agencyName }: SidebarProps) {
         </p>
       </div>
 
-      {/* Links */}
       <nav className="flex-1 px-3 py-4 space-y-1">
         {links.map(link => {
           const isActive = pathname === link.href
@@ -69,7 +67,6 @@ export default function Sidebar({ role, agencyName }: SidebarProps) {
         })}
       </nav>
 
-      {/* Footer */}
       <div className="px-3 py-4 border-t" style={{ borderColor: '#1E293B', borderWidth: '0.5px' }}>
         <button
           onClick={handleSignOut}
