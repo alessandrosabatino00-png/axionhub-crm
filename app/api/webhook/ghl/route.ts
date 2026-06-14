@@ -1,12 +1,38 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { supabaseAdmin } from '@/lib/supabase-admin'
 
-// GHL manda la stringa "undefined" per i campi vuoti — convertiamo in null
 function clean(value: unknown): string | null {
   if (typeof value !== 'string') return null
   const v = value.trim()
   if (!v || v === 'undefined' || v === 'null') return null
   return v
+}
+
+async function assignAgency(leadClass: string): Promise<string | null> {
+  // Prende solo agenzie attive con abbonamento attivo
+  const { data: agencies } = await supabaseAdmin
+    .from('agencies')
+    .select('id, plan, last_lead_assigned_at')
+    .eq('active', true)
+    .eq('subscription_active', true)
+    .order('last_lead_assigned_at', { ascending: true, nullsFirst: true })
+
+  if (!agencies || agencies.length === 0) return null
+
+  // Lead B: solo agenzie con piano premium
+  if (leadClass === 'B') {
+    const premium = agencies.filter(a => a.plan === 'premium')
+    if (premium.length === 0) return null
+    return premium[0].id
+  }
+
+  // Lead A: prima agenzia in ordine di last_lead_assigned_at (round robin)
+  if (leadClass === 'A') {
+    return agencies[0].id
+  }
+
+  // Lead C: non assegnati automaticamente
+  return null
 }
 
 export async function POST(req: NextRequest) {
@@ -26,7 +52,6 @@ export async function POST(req: NextRequest) {
   const address = clean(body.address)
   const property_type = clean(body.property_type)
   const ghl_contact_id = clean(body.ghl_contact_id)
-  const agency_id = clean(body.agency_id)
 
   if (!name || !phone || !ghl_contact_id) {
     console.error('Missing fields. Received:', JSON.stringify(rawBody))
@@ -42,7 +67,6 @@ export async function POST(req: NextRequest) {
   else if (lower.includes('lead c') || lower === 'c') normalizedClass = 'C'
 
   if (!['A','B','C'].includes(normalizedClass)) {
-    console.error('Invalid lead_class. Received:', leadClassRaw)
     return NextResponse.json({ error: 'Invalid lead_class', received: leadClassRaw }, { status: 400 })
   }
 
@@ -50,6 +74,10 @@ export async function POST(req: NextRequest) {
   const sizeNum = parseInt(clean(body.size_sqm) || '') || null
   const valueNum = parseFloat(clean(body.estimated_value) || '') || null
 
+  // Round robin — assegna agenzia automaticamente
+  const agency_id = await assignAgency(normalizedClass)
+
+  // Inserisce il lead
   const { data, error } = await supabaseAdmin
     .from('leads')
     .upsert(
@@ -80,5 +108,13 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: error.message }, { status: 500 })
   }
 
-  return NextResponse.json({ success: true, lead_id: data.id })
+  // Aggiorna last_lead_assigned_at per il round robin
+  if (agency_id) {
+    await supabaseAdmin
+      .from('agencies')
+      .update({ last_lead_assigned_at: new Date().toISOString() })
+      .eq('id', agency_id)
+  }
+
+  return NextResponse.json({ success: true, lead_id: data.id, assigned_to: agency_id })
 }
