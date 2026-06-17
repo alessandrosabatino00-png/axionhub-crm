@@ -128,3 +128,77 @@
     @apply font-sans;
   }
 }
+/* ============================================================
+   AXION DESIGN TOKENS
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap');
+
+:root {
+  --ax-blue: #1A4FD6;
+  --ax-cyan: #0ABDD4;
+  --ax-bg: #06060F;
+  --ax-bg2: #0C0C1A;
+  --ax-bg3: #111120;
+  --ax-border: rgba(255,255,255,0.055);
+  --ax-t1: #F0F4FF;
+  --ax-t2: #8FA3C8;
+  --ax-t3: #3D5080;
+}
+
+/* Orbital brand background */
+.orbital-bg::before {
+  content: '';
+  position: fixed;
+  top: -200px; left: -100px;
+  width: 600px; height: 600px;
+  border: 0.5px solid rgba(26,79,214,0.07);
+  border-radius: 50% / 30%;
+  transform: rotate(-22deg);
+  pointer-events: none;
+  z-index: 0;
+}
+.orbital-bg::after {
+  content: '';
+  position: fixed;
+  top: -60px; left: -150px;
+  width: 800px; height: 300px;
+  border: 0.5px solid rgba(10,189,212,0.05);
+  border-radius: 50% / 20%;
+  transform: rotate(18deg);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Logo gradient text */
+.logo-gradient {
+  background: linear-gradient(90deg, #F0F4FF 0%, #A8C4FF 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Nav active indicator */
+.nav-active::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 50%;
+  transform: translateY(-50%);
+  width: 2.5px; height: 16px;
+  border-radius: 0 3px 3px 0;
+  background: linear-gradient(180deg, var(--ax-blue), var(--ax-cyan));
+}
+
+/* Metric card hover gradient top border */
+.metric-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--ax-blue), var(--ax-cyan), transparent);
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+.metric-card:hover::before {
+  opacity: 0.6;
+}
