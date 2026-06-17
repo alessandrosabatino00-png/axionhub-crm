@@ -83,7 +83,7 @@ export default function Sidebar({ role, agencyName }: SidebarProps) {
           background: 'linear-gradient(135deg, rgba(26,79,214,0.06) 0%, transparent 60%)',
         }}
       >
-        <LogoSVG size={36}
+        <img src="/logo.png" alt="AXION" style={{ width: 44, height: 44, objectFit: "contain", flexShrink: 0 }}
         />
         <div className="flex flex-col leading-tight">
           <span className="text-[15px] font-bold tracking-tight logo-gradient">
