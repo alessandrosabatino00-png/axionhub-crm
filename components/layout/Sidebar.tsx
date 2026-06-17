@@ -1,7 +1,6 @@
 'use client'
 import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
-import LogoSVG from '@/components/ui/LogoSVG'
 import {
   LayoutDashboard, Users, AlertTriangle,
   TrendingUp, Building2, FileText, Settings, LogOut
