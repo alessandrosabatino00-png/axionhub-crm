@@ -1,5 +1,6 @@
 import { createClient } from '@supabase/supabase-js'
 import MetricCard from '@/components/ui/MetricCard'
+import { PageHeader } from '@/components/ui/PageHeader'
 
 async function getMetrics() {
   const supabase = createClient(
@@ -28,43 +29,27 @@ async function getMetrics() {
 
 export default async function FounderDashboard() {
   const { totalLeads, activeAgencies, unhandledLeads, mandates, convRate } = await getMetrics()
+  const hasUnhandled = (unhandledLeads ?? 0) > 0
 
   return (
-    <div className="space-y-8">
-      {/* Header */}
-      <div>
-        <h1 className="text-2xl font-bold text-white">Dashboard</h1>
-        <p className="text-sm mt-1" style={{ color: '#CBD5E1' }}>
-          Vista aggregata — tutte le agenzie
-        </p>
-      </div>
+    <div>
+      <PageHeader
+        title="Dashboard"
+        subtitle="Vista aggregata — tutte le agenzie"
+        live
+      />
 
-      {/* Metriche */}
-      <div className="grid grid-cols-5 gap-4">
-        <MetricCard
-          label="Lead totali"
-          value={totalLeads ?? 0}
-        />
-        <MetricCard
-          label="Agenzie attive"
-          value={activeAgencies ?? 0}
-          accent="#06B6D4"
-        />
+      <div className="grid grid-cols-5 rounded-[12px] overflow-hidden" style={{ border: '0.5px solid var(--ax-border)' }}>
+        <MetricCard label="Lead totali" value={totalLeads ?? 0} />
+        <MetricCard label="Agenzie attive" value={activeAgencies ?? 0} />
         <MetricCard
           label="Non gestiti"
           value={unhandledLeads ?? 0}
-          accent={unhandledLeads && unhandledLeads > 0 ? '#F59E0B' : '#10B981'}
+          critical={hasUnhandled}
+          sub={hasUnhandled ? 'clicca per gestire' : 'tutto sotto controllo'}
         />
-        <MetricCard
-          label="Mandati"
-          value={mandates ?? 0}
-          accent="#10B981"
-        />
-        <MetricCard
-          label="Tasso conversione"
-          value={`${convRate}%`}
-          accent="#4F46E5"
-        />
+        <MetricCard label="Mandati" value={mandates ?? 0} sub="contratti firmati" />
+        <MetricCard label="Tasso conversione" value={`${convRate}%`} showBorder={false} sub="lead → mandato" />
       </div>
     </div>
   )

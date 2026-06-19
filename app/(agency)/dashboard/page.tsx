@@ -2,6 +2,7 @@ import { createClient } from '@supabase/supabase-js'
 import { cookies } from 'next/headers'
 import { createServerClient } from '@supabase/ssr'
 import MetricCard from '@/components/ui/MetricCard'
+import { PageHeader } from '@/components/ui/PageHeader'
 
 async function getAgencyData() {
   const cookieStore = await cookies()
@@ -57,19 +58,18 @@ export default async function AgencyDashboard() {
   const { agency, total, toContact, meetings, mandates } = data
 
   return (
-    <div className="space-y-8">
-      <div>
-        <h1 className="text-2xl font-bold text-white">{agency?.name}</h1>
-        <p className="text-sm mt-1" style={{ color: '#CBD5E1' }}>
-          {agency?.city} — Dashboard mensile
-        </p>
-      </div>
+    <div>
+      <PageHeader
+        title={agency?.name || 'Dashboard'}
+        subtitle={`${agency?.city || ''} — Dashboard mensile`}
+        live
+      />
 
-      <div className="grid grid-cols-4 gap-4">
+      <div className="grid grid-cols-4 rounded-[12px] overflow-hidden" style={{ border: '0.5px solid var(--ax-border)' }}>
         <MetricCard label="Lead ricevuti" value={total ?? 0} />
-        <MetricCard label="Da contattare" value={toContact ?? 0} accent="#F59E0B" />
-        <MetricCard label="Appuntamenti" value={meetings ?? 0} accent="#A78BFA" />
-        <MetricCard label="Mandati" value={mandates ?? 0} accent="#10B981" />
+        <MetricCard label="Da contattare" value={toContact ?? 0} sub="status: nuovo" />
+        <MetricCard label="Appuntamenti" value={meetings ?? 0} sub="meeting fissati" />
+        <MetricCard label="Mandati" value={mandates ?? 0} showBorder={false} sub="contratti firmati" />
       </div>
     </div>
   )
