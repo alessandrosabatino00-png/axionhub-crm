@@ -31,9 +31,9 @@ export default async function FounderLayout({ children }: { children: React.Reac
   if (!membership || membership.role !== 'founder') redirect('/login')
 
   return (
-    <div className="flex min-h-screen" style={{ backgroundColor: '#0A0A14' }}>
+    <div className="flex min-h-screen" >
       <Sidebar role="founder" />
-      <main className="flex-1 ml-56 p-8">
+      <main className="flex-1 ml-[228px] p-8">
         {children}
       </main>
     </div>

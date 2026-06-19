@@ -39,9 +39,9 @@ export default async function AgencyLayout({ children }: { children: React.React
   if (!agency?.subscription_active) redirect('/subscription-required')
 
   return (
-    <div className="flex min-h-screen" style={{ backgroundColor: '#0A0A14' }}>
+    <div className="flex min-h-screen" >
       <Sidebar role="agent" agencyName={agency.name} />
-      <main className="flex-1 ml-56 p-8">
+      <main className="flex-1 ml-[228px] p-8">
         {children}
       </main>
     </div>

@@ -1,11 +1,15 @@
 'use client'
+import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
 import {
   LayoutDashboard, Users, AlertTriangle,
-  TrendingUp, Building2, FileText, Settings, LogOut
+  TrendingUp, Building2, FileText, Settings,
+  History, BarChart3, LogOut
 } from 'lucide-react'
+import { ThemeToggle } from '@/components/ui/ThemeToggle'
 import { signOut } from '@/lib/auth'
+
 const founderNav = [
   {
     label: 'Visione',
@@ -25,6 +29,7 @@ const founderNav = [
     ]
   }
 ]
+
 const agencyNav = [
   {
     label: 'Visione',
@@ -37,53 +42,65 @@ const agencyNav = [
   {
     label: 'Storico',
     items: [
-      { href: '/dashboard/history', icon: FileText, label: 'Storico' },
-      { href: '/dashboard/performance', icon: TrendingUp, label: 'Performance' },
+      { href: '/dashboard/history', icon: History, label: 'Storico' },
+      { href: '/dashboard/performance', icon: BarChart3, label: 'Performance' },
     ]
   }
 ]
+
 interface SidebarProps {
   role: 'agent' | 'founder'
   agencyName?: string
 }
+
 export default function Sidebar({ role, agencyName }: SidebarProps) {
   const pathname = usePathname()
   const router = useRouter()
   const nav = role === 'founder' ? founderNav : agencyNav
+
   const isActive = (href: string) => {
     if (href === '/founder' || href === '/dashboard') return pathname === href
     return pathname.startsWith(href)
   }
+
   async function handleSignOut() {
     await signOut()
     router.push('/login')
   }
+
+  const displayName = role === 'founder' ? 'Founder' : (agencyName || 'Agenzia')
+  const displayRole = role === 'founder' ? 'Admin' : 'Agenzia partner'
+  const initials = displayName.split(' ').map(n => n[0]).join('').slice(0, 2).toUpperCase()
+
   return (
     <aside
       className="w-[228px] flex-shrink-0 flex flex-col h-screen fixed left-0 top-0"
-      style={{
-        background: 'var(--ax-bg2)',
-        borderRight: '0.5px solid var(--ax-border)',
-        position: 'fixed',
-      }}
+      style={{ background: 'var(--ax-bg2)', borderRight: '0.5px solid var(--ax-border)' }}
     >
-      {/* Accent line left */}
+      {/* Accent line */}
       <div
         className="absolute left-0 top-0 bottom-0 w-px pointer-events-none"
         style={{
           background: 'linear-gradient(180deg, transparent 0%, var(--ax-blue) 25%, var(--ax-cyan) 75%, transparent 100%)',
-          opacity: 0.3,
+          opacity: 0.35,
         }}
       />
+
       {/* Logo */}
       <div
-        className="flex items-center gap-3 px-4 py-3.5 min-h-[64px]"
+        className="flex items-center gap-3 px-4 py-3.5 min-h-[68px]"
         style={{
           borderBottom: '0.5px solid var(--ax-border)',
           background: 'linear-gradient(135deg, rgba(26,79,214,0.06) 0%, transparent 60%)',
         }}
       >
-        <img src="/logo.png" alt="AXION" style={{ width: 44, height: 44, objectFit: "contain", flexShrink: 0 }}
+        <Image
+          src="/logo.png"
+          alt="AXION"
+          width={42}
+          height={42}
+          className="object-contain flex-shrink-0"
+          priority
         />
         <div className="flex flex-col leading-tight">
           <span className="text-[15px] font-bold tracking-tight logo-gradient">
@@ -97,20 +114,21 @@ export default function Sidebar({ role, agencyName }: SidebarProps) {
           </span>
         </div>
       </div>
+
       {/* Live status */}
       <div
-        className="flex items-center gap-1.5 px-4 py-1.5 text-[10px]"
-        style={{
-          borderBottom: '0.5px solid var(--ax-border)',
-          color: 'var(--ax-t3)',
-          background: 'rgba(10,189,212,0.02)',
-        }}
+        className="flex items-center gap-1.5 px-4 py-2 text-[10px]"
+        style={{ borderBottom: '0.5px solid var(--ax-border)', color: 'var(--ax-t3)' }}
       >
-        <div className="w-[5px] h-[5px] rounded-full bg-emerald-500 animate-pulse" />
+        <span className="relative flex h-[7px] w-[7px]">
+          <span className="absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-75 animate-ping" />
+          <span className="relative inline-flex rounded-full h-[7px] w-[7px] bg-emerald-500" />
+        </span>
         <span>Sistema attivo</span>
       </div>
+
       {/* Nav */}
-      <div className="flex-1 overflow-y-auto py-2">
+      <nav className="flex-1 overflow-y-auto py-2">
         {nav.map((group) => (
           <div key={group.label} className="px-2 mb-1">
             <div
@@ -126,28 +144,24 @@ export default function Sidebar({ role, agencyName }: SidebarProps) {
                 <Link
                   key={item.href}
                   href={item.href}
-                  className="flex items-center gap-2 px-2.5 py-[7px] rounded-[7px] text-[12.5px] transition-all duration-100 relative mb-0.5"
+                  className={`flex items-center gap-2 px-2.5 py-[7px] rounded-[8px] text-[12.5px] transition-all duration-150 relative mb-0.5 ${active ? 'nav-active-bar' : ''}`}
                   style={{
                     color: active ? 'var(--ax-t1)' : 'var(--ax-t2)',
                     background: active
-                      ? 'linear-gradient(90deg, rgba(26,79,214,0.15) 0%, rgba(26,79,214,0.04) 100%)'
+                      ? 'linear-gradient(90deg, rgba(26,79,214,0.16) 0%, rgba(26,79,214,0.04) 100%)'
                       : 'transparent',
                   }}
                   onMouseEnter={e => {
-                    if (!active) (e.currentTarget as HTMLElement).style.background = 'rgba(59,91,219,0.08)'
+                    if (!active) e.currentTarget.style.background = 'var(--ax-bg3)'
                   }}
                   onMouseLeave={e => {
-                    if (!active) (e.currentTarget as HTMLElement).style.background = 'transparent'
+                    if (!active) e.currentTarget.style.background = 'transparent'
                   }}
                 >
-                  {active && <span className="nav-active" />}
                   <Icon
                     size={14}
                     className="flex-shrink-0"
-                    style={{
-                      opacity: active ? 1 : 0.55,
-                      color: active ? 'var(--ax-cyan)' : 'inherit',
-                    }}
+                    style={{ opacity: active ? 1 : 0.6, color: active ? 'var(--ax-cyan)' : 'inherit' }}
                   />
                   <span>{item.label}</span>
                 </Link>
@@ -155,24 +169,43 @@ export default function Sidebar({ role, agencyName }: SidebarProps) {
             })}
           </div>
         ))}
+      </nav>
+
+      {/* Theme toggle */}
+      <div
+        className="flex items-center justify-between px-4 py-3"
+        style={{ borderTop: '0.5px solid var(--ax-border)' }}
+      >
+        <span className="text-[11px]" style={{ color: 'var(--ax-t2)' }}>Tema</span>
+        <ThemeToggle />
       </div>
+
       {/* User / Logout */}
       <div
         className="px-2 py-2.5"
-        style={{
-          borderTop: '0.5px solid var(--ax-border)',
-          background: 'linear-gradient(0deg, rgba(26,79,214,0.04), transparent)',
-        }}
+        style={{ borderTop: '0.5px solid var(--ax-border)' }}
       >
         <button
           onClick={handleSignOut}
-          className="flex items-center gap-2.5 px-2.5 py-[7px] rounded-[7px] w-full transition-all text-[12.5px]"
-          style={{ color: 'var(--ax-t2)' }}
-          onMouseEnter={e => (e.currentTarget.style.background = 'rgba(239,68,68,0.08)')}
+          className="flex items-center gap-2.5 px-2.5 py-[7px] rounded-[8px] cursor-pointer transition-all w-full"
+          onMouseEnter={e => (e.currentTarget.style.background = 'var(--ax-bg3)')}
           onMouseLeave={e => (e.currentTarget.style.background = 'transparent')}
         >
-          <LogOut size={14} style={{ opacity: 0.55 }} />
-          <span>{role === 'founder' ? 'Founder' : agencyName || 'Agenzia'} · Esci</span>
+          <div
+            className="w-7 h-7 rounded-full flex items-center justify-center text-[10px] font-bold flex-shrink-0 text-white"
+            style={{ background: 'linear-gradient(135deg, var(--ax-blue), var(--ax-cyan))' }}
+          >
+            {initials}
+          </div>
+          <div className="text-left">
+            <div className="text-[11.5px] font-semibold" style={{ color: 'var(--ax-t1)' }}>
+              {displayName}
+            </div>
+            <div className="text-[9.5px] flex items-center gap-1" style={{ color: 'var(--ax-t3)' }}>
+              <LogOut size={9} />
+              {displayRole} · Esci
+            </div>
+          </div>
         </button>
       </div>
     </aside>
