@@ -1,6 +1,8 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import { PageHeader } from '@/components/ui/PageHeader'
+import MetricCard from '@/components/ui/MetricCard'
 
 interface FunnelStep {
   label: string
@@ -50,8 +52,8 @@ export default function FunnelPage() {
   }
 
   const steps: FunnelStep[] = [
-    { label: 'Click Meta Ads', value: snapshot.ad_clicks, color: '#4F46E5' },
-    { label: 'Lead qualificati', value: leads.total, color: '#06B6D4' },
+    { label: 'Click Meta Ads', value: snapshot.ad_clicks, color: 'var(--ax-blue)' },
+    { label: 'Lead qualificati', value: leads.total, color: 'var(--ax-cyan)' },
     { label: 'Contattati', value: leads.contacted, color: '#F59E0B' },
     { label: 'Appuntamenti', value: leads.meeting, color: '#A78BFA' },
     { label: 'Mandati firmati', value: leads.mandate, color: '#10B981' },
@@ -68,122 +70,105 @@ export default function FunnelPage() {
     : '0.0'
 
   return (
-    <div className="space-y-8 max-w-3xl">
-      <div>
-        <h1 className="text-2xl font-bold text-white">Funnel</h1>
-        <p className="text-sm mt-1" style={{ color: '#CBD5E1' }}>
-          Conversione end-to-end ads → mandati
-        </p>
-      </div>
+    <div>
+      <PageHeader title="Funnel" subtitle="Conversione end-to-end ads → mandati" />
 
-      {/* Metriche derivate */}
-      <div className="grid grid-cols-3 gap-4">
-        {[
-          { label: 'CPL qualificato', value: cpl === '—' ? '—' : `€${cpl}` },
-          { label: 'Tasso chiusura', value: `${closeRate}%` },
-          { label: 'Budget ads', value: snapshot.budget ? `€${snapshot.budget}` : '—' },
-        ].map(m => (
-          <div
-            key={m.label}
-            className="rounded-xl border p-4"
-            style={{ backgroundColor: '#16161F', borderColor: '#1E293B', borderWidth: '0.5px' }}
-          >
-            <p className="text-xs uppercase tracking-wider" style={{ color: '#CBD5E1' }}>{m.label}</p>
-            <p className="text-2xl font-bold text-white mt-1">{m.value}</p>
-          </div>
-        ))}
-      </div>
+      <div className="space-y-5 max-w-3xl">
+        <div className="grid grid-cols-3 rounded-[12px] overflow-hidden" style={{ border: '0.5px solid var(--ax-border)' }}>
+          <MetricCard label="CPL qualificato" value={cpl === '—' ? '—' : `€${cpl}`} />
+          <MetricCard label="Tasso chiusura" value={`${closeRate}%`} />
+          <MetricCard label="Budget ads" value={snapshot.budget ? `€${snapshot.budget}` : '—'} showBorder={false} />
+        </div>
 
-      {/* Barre funnel */}
-      <div
-        className="rounded-xl border p-6 space-y-4"
-        style={{ backgroundColor: '#16161F', borderColor: '#1E293B', borderWidth: '0.5px' }}
-      >
-        <h2 className="text-base font-semibold text-white">Fasi del funnel</h2>
-        {loading ? (
-          <p style={{ color: '#CBD5E1' }}>Caricamento...</p>
-        ) : (
-          steps.map((step, i) => {
-            const pct = Math.round((step.value / max) * 100)
-            const convPrev = i > 0 && steps[i-1].value > 0
-              ? ((step.value / steps[i-1].value) * 100).toFixed(1)
-              : null
-            return (
-              <div key={step.label} className="space-y-1">
-                <div className="flex justify-between items-center">
-                  <span className="text-sm" style={{ color: '#CBD5E1' }}>{step.label}</span>
-                  <div className="flex items-center gap-3">
-                    {convPrev && (
-                      <span className="text-xs" style={{ color: '#CBD5E1' }}>
-                        conv. {convPrev}%
-                      </span>
-                    )}
-                    <span className="text-sm font-bold text-white">{step.value}</span>
+        <div
+          className="rounded-[12px] p-6 space-y-4"
+          style={{ background: 'var(--ax-bg2)', border: '0.5px solid var(--ax-border)' }}
+        >
+          <h2 className="text-[13px] font-semibold" style={{ color: 'var(--ax-t1)' }}>Fasi del funnel</h2>
+          {loading ? (
+            <p className="text-[12px]" style={{ color: 'var(--ax-t3)' }}>Caricamento...</p>
+          ) : (
+            steps.map((step, i) => {
+              const pct = Math.round((step.value / max) * 100)
+              const convPrev = i > 0 && steps[i-1].value > 0
+                ? ((step.value / steps[i-1].value) * 100).toFixed(1)
+                : null
+              return (
+                <div key={step.label} className="space-y-1.5">
+                  <div className="flex justify-between items-center">
+                    <span className="text-[12px]" style={{ color: 'var(--ax-t2)' }}>{step.label}</span>
+                    <div className="flex items-center gap-3">
+                      {convPrev && (
+                        <span className="text-[10px] font-mono" style={{ color: 'var(--ax-t3)' }}>
+                          conv. {convPrev}%
+                        </span>
+                      )}
+                      <span className="text-[13px] font-bold font-mono" style={{ color: 'var(--ax-t1)' }}>{step.value}</span>
+                    </div>
+                  </div>
+                  <div className="h-[6px] rounded-full" style={{ background: 'var(--ax-bg3)' }}>
+                    <div
+                      className="h-[6px] rounded-full transition-all duration-300"
+                      style={{ width: `${pct}%`, background: step.color }}
+                    />
                   </div>
                 </div>
-                <div className="h-2 rounded-full" style={{ backgroundColor: '#1E293B' }}>
-                  <div
-                    className="h-2 rounded-full transition-all"
-                    style={{ width: `${pct}%`, backgroundColor: step.color }}
-                  />
-                </div>
-              </div>
-            )
-          })
-        )}
-      </div>
+              )
+            })
+          )}
+        </div>
 
-      {/* Form inserimento manuale */}
-      <div
-        className="rounded-xl border p-6 space-y-4"
-        style={{ backgroundColor: '#16161F', borderColor: '#1E293B', borderWidth: '0.5px' }}
-      >
-        <h2 className="text-base font-semibold text-white">Inserimento dati ads</h2>
-        <form onSubmit={handleSave} className="grid grid-cols-3 gap-4">
-          <div className="space-y-1.5">
-            <label className="text-xs" style={{ color: '#CBD5E1' }}>Click ads</label>
-            <input
-              type="number"
-              value={form.ad_clicks}
-              onChange={e => setForm({ ...form, ad_clicks: e.target.value })}
-              placeholder="0"
-              className="w-full text-sm rounded-lg px-3 py-2"
-              style={{ backgroundColor: '#0A0A14', borderColor: '#1E293B', border: '0.5px solid #1E293B', color: '#FFFFFF' }}
-            />
-          </div>
-          <div className="space-y-1.5">
-            <label className="text-xs" style={{ color: '#CBD5E1' }}>Budget €</label>
-            <input
-              type="number"
-              value={form.budget}
-              onChange={e => setForm({ ...form, budget: e.target.value })}
-              placeholder="0"
-              className="w-full text-sm rounded-lg px-3 py-2"
-              style={{ backgroundColor: '#0A0A14', borderColor: '#1E293B', border: '0.5px solid #1E293B', color: '#FFFFFF' }}
-            />
-          </div>
-          <div className="space-y-1.5">
-            <label className="text-xs" style={{ color: '#CBD5E1' }}>Campagna</label>
-            <input
-              type="text"
-              value={form.campaign}
-              onChange={e => setForm({ ...form, campaign: e.target.value })}
-              placeholder="Nome campagna"
-              className="w-full text-sm rounded-lg px-3 py-2"
-              style={{ backgroundColor: '#0A0A14', borderColor: '#1E293B', border: '0.5px solid #1E293B', color: '#FFFFFF' }}
-            />
-          </div>
-          <div className="col-span-3">
-            <button
-              type="submit"
-              disabled={saving}
-              className="px-4 py-2 rounded-lg text-sm font-medium"
-              style={{ backgroundColor: '#4F46E5', color: '#FFFFFF' }}
-            >
-              {saving ? 'Salvataggio...' : 'Salva dati'}
-            </button>
-          </div>
-        </form>
+        <div
+          className="rounded-[12px] p-6 space-y-4"
+          style={{ background: 'var(--ax-bg2)', border: '0.5px solid var(--ax-border)' }}
+        >
+          <h2 className="text-[13px] font-semibold" style={{ color: 'var(--ax-t1)' }}>Inserimento dati ads</h2>
+          <form onSubmit={handleSave} className="grid grid-cols-3 gap-4">
+            <div className="space-y-1.5">
+              <label className="text-[11px]" style={{ color: 'var(--ax-t3)' }}>Click ads</label>
+              <input
+                type="number"
+                value={form.ad_clicks}
+                onChange={e => setForm({ ...form, ad_clicks: e.target.value })}
+                placeholder="0"
+                className="w-full text-[12px] rounded-[8px] px-3 py-2"
+                style={{ background: 'var(--ax-bg3)', border: '0.5px solid var(--ax-border)', color: 'var(--ax-t1)' }}
+              />
+            </div>
+            <div className="space-y-1.5">
+              <label className="text-[11px]" style={{ color: 'var(--ax-t3)' }}>Budget €</label>
+              <input
+                type="number"
+                value={form.budget}
+                onChange={e => setForm({ ...form, budget: e.target.value })}
+                placeholder="0"
+                className="w-full text-[12px] rounded-[8px] px-3 py-2"
+                style={{ background: 'var(--ax-bg3)', border: '0.5px solid var(--ax-border)', color: 'var(--ax-t1)' }}
+              />
+            </div>
+            <div className="space-y-1.5">
+              <label className="text-[11px]" style={{ color: 'var(--ax-t3)' }}>Campagna</label>
+              <input
+                type="text"
+                value={form.campaign}
+                onChange={e => setForm({ ...form, campaign: e.target.value })}
+                placeholder="Nome campagna"
+                className="w-full text-[12px] rounded-[8px] px-3 py-2"
+                style={{ background: 'var(--ax-bg3)', border: '0.5px solid var(--ax-border)', color: 'var(--ax-t1)' }}
+              />
+            </div>
+            <div className="col-span-3">
+              <button
+                type="submit"
+                disabled={saving}
+                className="px-4 py-2 rounded-[8px] text-[12px] font-medium transition-opacity disabled:opacity-50"
+                style={{ background: 'var(--ax-blue)', color: '#FFFFFF' }}
+              >
+                {saving ? 'Salvataggio...' : 'Salva dati'}
+              </button>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   )

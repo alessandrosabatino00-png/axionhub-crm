@@ -1,4 +1,7 @@
 import { createClient } from '@supabase/supabase-js'
+import { PageHeader } from '@/components/ui/PageHeader'
+import { EmptyState } from '@/components/ui/EmptyState'
+import { Building2 } from 'lucide-react'
 
 async function getAgencies() {
   const supabase = createClient(
@@ -11,7 +14,6 @@ async function getAgencies() {
     .select('*')
     .order('created_at', { ascending: false })
 
-  // Per ogni agenzia prende i conteggi lead
   const enriched = await Promise.all(
     (agencies || []).map(async (agency) => {
       const [
@@ -39,68 +41,63 @@ export default async function AgenciesPage() {
   const agencies = await getAgencies()
 
   return (
-    <div className="space-y-6">
-      <div>
-        <h1 className="text-2xl font-bold text-white">Agenzie</h1>
-        <p className="text-sm mt-1" style={{ color: '#CBD5E1' }}>
-          {agencies.length} agenzie registrate
-        </p>
-      </div>
+    <div>
+      <PageHeader title="Agenzie" subtitle={`${agencies.length} agenzie registrate`} />
 
-      <div className="rounded-xl border overflow-hidden" style={{ borderColor: '#1E293B', borderWidth: '0.5px' }}>
-        <table className="w-full text-sm">
-          <thead>
-            <tr style={{ backgroundColor: '#16161F', borderBottom: '0.5px solid #1E293B' }}>
-              {['Agenzia', 'Città', 'Lead totali', 'Non gestiti', 'Mandati', 'Conv%', 'SLA', 'Abbonamento'].map(h => (
-                <th key={h} className="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider" style={{ color: '#CBD5E1' }}>
-                  {h}
-                </th>
+      {agencies.length === 0 ? (
+        <div className="rounded-[12px]" style={{ background: 'var(--ax-bg2)', border: '0.5px solid var(--ax-border)' }}>
+          <EmptyState
+            icon={Building2}
+            title="Nessuna agenzia ancora"
+            description="Creane una dalla pagina Impostazioni per iniziare ad assegnare i lead."
+          />
+        </div>
+      ) : (
+        <div className="rounded-[12px] overflow-hidden" style={{ border: '0.5px solid var(--ax-border)' }}>
+          <table className="w-full text-sm">
+            <thead>
+              <tr style={{ background: 'var(--ax-bg2)', borderBottom: '0.5px solid var(--ax-border)' }}>
+                {['Agenzia', 'Città', 'Lead totali', 'Non gestiti', 'Mandati', 'Conv%', 'SLA', 'Abbonamento'].map(h => (
+                  <th key={h} className="px-4 py-3 text-left text-[10px] font-semibold uppercase tracking-[0.6px]" style={{ color: 'var(--ax-t3)' }}>
+                    {h}
+                  </th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {agencies.map((agency: any) => (
+                <tr key={agency.id} style={{ borderBottom: '0.5px solid var(--ax-border)' }}>
+                  <td className="px-4 py-3">
+                    <div className="font-medium text-[13px]" style={{ color: 'var(--ax-t1)' }}>{agency.name}</div>
+                    <div className="text-[11px]" style={{ color: 'var(--ax-t3)' }}>{agency.email}</div>
+                  </td>
+                  <td className="px-4 py-3 text-[12px]" style={{ color: 'var(--ax-t2)' }}>{agency.city || '—'}</td>
+                  <td className="px-4 py-3 font-mono text-[13px]" style={{ color: 'var(--ax-t1)' }}>{agency.total ?? 0}</td>
+                  <td className="px-4 py-3 font-mono text-[13px]">
+                    <span style={{ color: agency.unhandled > 0 ? '#F59E0B' : '#10B981' }}>
+                      {agency.unhandled ?? 0}
+                    </span>
+                  </td>
+                  <td className="px-4 py-3 font-mono text-[13px]" style={{ color: '#10B981' }}>{agency.mandates ?? 0}</td>
+                  <td className="px-4 py-3 font-mono text-[13px]" style={{ color: 'var(--ax-blue)' }}>{agency.convRate}%</td>
+                  <td className="px-4 py-3 text-[12px]" style={{ color: 'var(--ax-t2)' }}>{agency.sla_hours}h</td>
+                  <td className="px-4 py-3">
+                    <span
+                      className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-medium"
+                      style={{
+                        background: agency.subscription_active ? 'rgba(16,185,129,0.12)' : 'rgba(239,68,68,0.1)',
+                        color: agency.subscription_active ? '#10B981' : '#EF4444'
+                      }}
+                    >
+                      {agency.subscription_active ? 'Attivo' : 'Inattivo'}
+                    </span>
+                  </td>
+                </tr>
               ))}
-            </tr>
-          </thead>
-          <tbody>
-            {agencies.length === 0 && (
-              <tr>
-                <td colSpan={8} className="px-4 py-12 text-center" style={{ color: '#CBD5E1' }}>
-                  Nessuna agenzia ancora. Creane una dalle impostazioni.
-                </td>
-              </tr>
-            )}
-            {agencies.map((agency: any) => (
-              <tr
-                key={agency.id}
-                style={{ borderBottom: '0.5px solid #1E293B' }}
-              >
-                <td className="px-4 py-3">
-                  <div className="font-medium text-white">{agency.name}</div>
-                  <div className="text-xs" style={{ color: '#CBD5E1' }}>{agency.email}</div>
-                </td>
-                <td className="px-4 py-3" style={{ color: '#CBD5E1' }}>{agency.city || '—'}</td>
-                <td className="px-4 py-3 text-white">{agency.total ?? 0}</td>
-                <td className="px-4 py-3">
-                  <span style={{ color: agency.unhandled > 0 ? '#F59E0B' : '#10B981' }}>
-                    {agency.unhandled ?? 0}
-                  </span>
-                </td>
-                <td className="px-4 py-3" style={{ color: '#10B981' }}>{agency.mandates ?? 0}</td>
-                <td className="px-4 py-3" style={{ color: '#4F46E5' }}>{agency.convRate}%</td>
-                <td className="px-4 py-3" style={{ color: '#CBD5E1' }}>{agency.sla_hours}h</td>
-                <td className="px-4 py-3">
-                  <span
-                    className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium"
-                    style={{
-                      backgroundColor: agency.subscription_active ? '#064E3B' : '#450A0A',
-                      color: agency.subscription_active ? '#10B981' : '#EF4444'
-                    }}
-                  >
-                    {agency.subscription_active ? 'Attivo' : 'Inattivo'}
-                  </span>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+            </tbody>
+          </table>
+        </div>
+      )}
     </div>
   )
 }

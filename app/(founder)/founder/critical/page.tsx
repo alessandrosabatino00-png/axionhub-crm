@@ -1,5 +1,8 @@
 import { createClient } from '@supabase/supabase-js'
 import StatusBadge from '@/components/ui/StatusBadge'
+import { PageHeader } from '@/components/ui/PageHeader'
+import { EmptyState } from '@/components/ui/EmptyState'
+import { CheckCircle2 } from 'lucide-react'
 
 async function getCriticalLeads() {
   const supabase = createClient(
@@ -31,32 +34,27 @@ export default async function CriticalLeads() {
   const leads = await getCriticalLeads()
 
   return (
-    <div className="space-y-6">
-      <div>
-        <h1 className="text-2xl font-bold text-white">Lead critici</h1>
-        <p className="text-sm mt-1" style={{ color: '#CBD5E1' }}>
-          Lead non gestiti da più di 48h — {leads.length} in attesa
-        </p>
-      </div>
+    <div>
+      <PageHeader
+        title="Lead critici"
+        subtitle={`Lead non gestiti da più di 48h — ${leads.length} in attesa`}
+      />
 
       {leads.length === 0 ? (
-        <div
-          className="rounded-xl border p-12 text-center"
-          style={{ backgroundColor: '#16161F', borderColor: '#1E293B', borderWidth: '0.5px' }}
-        >
-          <p className="text-2xl mb-2">✅</p>
-          <p className="font-medium text-white">Nessun lead critico</p>
-          <p className="text-sm mt-1" style={{ color: '#CBD5E1' }}>
-            Tutti i lead sono stati gestiti entro 48h
-          </p>
+        <div className="rounded-[12px]" style={{ background: 'var(--ax-bg2)', border: '0.5px solid var(--ax-border)' }}>
+          <EmptyState
+            icon={CheckCircle2}
+            title="Nessun lead critico"
+            description="Tutti i lead sono stati gestiti entro le 48h previste dalla SLA."
+          />
         </div>
       ) : (
-        <div className="rounded-xl border overflow-hidden" style={{ borderColor: '#1E293B', borderWidth: '0.5px' }}>
+        <div className="rounded-[12px] overflow-hidden" style={{ border: '0.5px solid var(--ax-border)' }}>
           <table className="w-full text-sm">
             <thead>
-              <tr style={{ backgroundColor: '#16161F', borderBottom: '0.5px solid #1E293B' }}>
+              <tr style={{ background: 'var(--ax-bg2)', borderBottom: '0.5px solid var(--ax-border)' }}>
                 {['Proprietario', 'Classe', 'Agenzia', 'Stato', 'Ore in attesa'].map(h => (
-                  <th key={h} className="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider" style={{ color: '#CBD5E1' }}>
+                  <th key={h} className="px-4 py-3 text-left text-[10px] font-semibold uppercase tracking-[0.6px]" style={{ color: 'var(--ax-t3)' }}>
                     {h}
                   </th>
                 ))}
@@ -68,23 +66,23 @@ export default async function CriticalLeads() {
                 return (
                   <tr
                     key={lead.id}
-                    style={{ backgroundColor: '#450A0A22', borderBottom: '0.5px solid #1E293B' }}
+                    style={{ background: 'rgba(239,68,68,0.06)', borderBottom: '0.5px solid var(--ax-border)' }}
                   >
                     <td className="px-4 py-3">
-                      <div className="font-medium text-white">{lead.name}</div>
-                      <div className="text-xs" style={{ color: '#CBD5E1' }}>{lead.phone}</div>
+                      <div className="font-medium text-[13px]" style={{ color: 'var(--ax-t1)' }}>{lead.name}</div>
+                      <div className="text-[11px]" style={{ color: 'var(--ax-t3)' }}>{lead.phone}</div>
                     </td>
                     <td className="px-4 py-3">
                       <StatusBadge status={lead.lead_class} type="class" />
                     </td>
-                    <td className="px-4 py-3" style={{ color: '#CBD5E1' }}>
+                    <td className="px-4 py-3 text-[12px]" style={{ color: 'var(--ax-t2)' }}>
                       {(lead.agencies as any)?.name || '—'}
                     </td>
                     <td className="px-4 py-3">
                       <StatusBadge status={lead.status} />
                     </td>
                     <td className="px-4 py-3">
-                      <span className="font-bold" style={{ color: '#EF4444' }}>
+                      <span className="font-bold font-mono text-[13px]" style={{ color: '#EF4444' }}>
                         {hours}h
                       </span>
                     </td>

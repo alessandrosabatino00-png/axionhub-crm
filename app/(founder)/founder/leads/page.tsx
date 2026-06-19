@@ -1,5 +1,8 @@
 import { createClient } from '@supabase/supabase-js'
 import StatusBadge from '@/components/ui/StatusBadge'
+import { PageHeader } from '@/components/ui/PageHeader'
+import { EmptyState } from '@/components/ui/EmptyState'
+import { Users } from 'lucide-react'
 
 async function getLeads() {
   const supabase = createClient(
@@ -29,11 +32,11 @@ function timeAgo(dateStr: string) {
   return `${m}m fa`
 }
 
-function rowColor(lead: any) {
+function rowBg(lead: any) {
   if (lead.status !== 'new') return 'transparent'
   const hours = (Date.now() - new Date(lead.status_updated_at).getTime()) / 3600000
-  if (hours >= 48) return '#450A0A22'
-  if (hours >= 2) return '#451A0322'
+  if (hours >= 48) return 'rgba(239,68,68,0.06)'
+  if (hours >= 2) return 'rgba(245,158,11,0.05)'
   return 'transparent'
 }
 
@@ -41,73 +44,68 @@ export default async function FounderLeads() {
   const leads = await getLeads()
 
   return (
-    <div className="space-y-6">
-      <div>
-        <h1 className="text-2xl font-bold text-white">Tutti i lead</h1>
-        <p className="text-sm mt-1" style={{ color: '#CBD5E1' }}>
-          {leads.length} lead totali
-        </p>
-      </div>
+    <div>
+      <PageHeader title="Tutti i lead" subtitle={`${leads.length} lead totali`} live />
 
-      <div className="rounded-xl border overflow-hidden" style={{ borderColor: '#1E293B', borderWidth: '0.5px' }}>
-        <table className="w-full text-sm">
-          <thead>
-            <tr style={{ backgroundColor: '#16161F', borderBottom: '0.5px solid #1E293B' }}>
-              {['Proprietario', 'Indirizzo', 'Tipo', 'Classe', 'Valore', 'Agenzia', 'Stato', 'Ricevuto'].map(h => (
-                <th key={h} className="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider" style={{ color: '#CBD5E1' }}>
-                  {h}
-                </th>
+      {leads.length === 0 ? (
+        <div className="rounded-[12px]" style={{ background: 'var(--ax-bg2)', border: '0.5px solid var(--ax-border)' }}>
+          <EmptyState
+            icon={Users}
+            title="Nessun lead ancora"
+            description="I lead arriveranno automaticamente dal webhook GHL non appena GoHighLevel li classifica."
+          />
+        </div>
+      ) : (
+        <div className="rounded-[12px] overflow-hidden" style={{ border: '0.5px solid var(--ax-border)' }}>
+          <table className="w-full text-sm">
+            <thead>
+              <tr style={{ background: 'var(--ax-bg2)', borderBottom: '0.5px solid var(--ax-border)' }}>
+                {['Proprietario', 'Indirizzo', 'Tipo', 'Classe', 'Valore', 'Agenzia', 'Stato', 'Ricevuto'].map(h => (
+                  <th key={h} className="px-4 py-3 text-left text-[10px] font-semibold uppercase tracking-[0.6px]" style={{ color: 'var(--ax-t3)' }}>
+                    {h}
+                  </th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {leads.map((lead: any) => (
+                <tr
+                  key={lead.id}
+                  style={{ background: rowBg(lead), borderBottom: '0.5px solid var(--ax-border)' }}
+                >
+                  <td className="px-4 py-3">
+                    <div className="font-medium text-[13px]" style={{ color: 'var(--ax-t1)' }}>{lead.name}</div>
+                    <div className="text-[11px]" style={{ color: 'var(--ax-t3)' }}>{lead.phone}</div>
+                  </td>
+                  <td className="px-4 py-3 text-[12px]" style={{ color: 'var(--ax-t2)' }}>
+                    {lead.address || lead.cap || '—'}
+                  </td>
+                  <td className="px-4 py-3 text-[12px]" style={{ color: 'var(--ax-t2)' }}>
+                    {lead.property_type || '—'}
+                  </td>
+                  <td className="px-4 py-3">
+                    <StatusBadge status={lead.lead_class} type="class" />
+                  </td>
+                  <td className="px-4 py-3 text-[12px] font-mono" style={{ color: 'var(--ax-t2)' }}>
+                    {lead.estimated_value
+                      ? `€${Number(lead.estimated_value).toLocaleString('it-IT')}`
+                      : '—'}
+                  </td>
+                  <td className="px-4 py-3 text-[12px]" style={{ color: 'var(--ax-t2)' }}>
+                    {(lead.agencies as any)?.name || '—'}
+                  </td>
+                  <td className="px-4 py-3">
+                    <StatusBadge status={lead.status} />
+                  </td>
+                  <td className="px-4 py-3 text-[11px] font-mono" style={{ color: 'var(--ax-t3)' }}>
+                    {timeAgo(lead.created_at)}
+                  </td>
+                </tr>
               ))}
-            </tr>
-          </thead>
-          <tbody>
-            {leads.length === 0 && (
-              <tr>
-                <td colSpan={8} className="px-4 py-12 text-center" style={{ color: '#CBD5E1' }}>
-                  Nessun lead ancora. Arriveranno dal webhook GHL.
-                </td>
-              </tr>
-            )}
-            {leads.map((lead: any) => (
-              <tr
-                key={lead.id}
-                style={{
-                  backgroundColor: rowColor(lead),
-                  borderBottom: '0.5px solid #1E293B'
-                }}
-              >
-                <td className="px-4 py-3">
-                  <div className="font-medium text-white">{lead.name}</div>
-                  <div className="text-xs" style={{ color: '#CBD5E1' }}>{lead.phone}</div>
-                </td>
-                <td className="px-4 py-3" style={{ color: '#CBD5E1' }}>
-                  {lead.address || lead.cap || '—'}
-                </td>
-                <td className="px-4 py-3" style={{ color: '#CBD5E1' }}>
-                  {lead.property_type || '—'}
-                </td>
-                <td className="px-4 py-3">
-                  <StatusBadge status={lead.lead_class} type="class" />
-                </td>
-                <td className="px-4 py-3" style={{ color: '#CBD5E1' }}>
-                  {lead.estimated_value
-                    ? `€${Number(lead.estimated_value).toLocaleString('it-IT')}`
-                    : '—'}
-                </td>
-                <td className="px-4 py-3" style={{ color: '#CBD5E1' }}>
-                  {(lead.agencies as any)?.name || '—'}
-                </td>
-                <td className="px-4 py-3">
-                  <StatusBadge status={lead.status} />
-                </td>
-                <td className="px-4 py-3 text-xs" style={{ color: '#CBD5E1' }}>
-                  {timeAgo(lead.created_at)}
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+            </tbody>
+          </table>
+        </div>
+      )}
     </div>
   )
 }
