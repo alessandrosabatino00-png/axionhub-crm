@@ -82,6 +82,20 @@
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
+
+  /* ===== AXION tokens — LIGHT MODE ===== */
+  --ax-bg: #F7F8FC;
+  --ax-bg2: #FFFFFF;
+  --ax-bg3: #EEF1F8;
+  --ax-border: rgba(15,23,42,0.08);
+  --ax-border-strong: rgba(15,23,42,0.14);
+  --ax-t1: #0F1629;
+  --ax-t2: #4B5876;
+  --ax-t3: #94A1C0;
+  --ax-blue: #1A4FD6;
+  --ax-blue-bright: #2B5FF0;
+  --ax-cyan: #0890A3;
+  --ax-card-shadow: 0 2px 12px rgba(15,23,42,0.06);
 }
 
 .dark {
@@ -116,6 +130,20 @@
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.556 0 0);
+
+  /* ===== AXION tokens — DARK MODE ===== */
+  --ax-bg: #06060F;
+  --ax-bg2: #0C0C1A;
+  --ax-bg3: #111120;
+  --ax-border: rgba(255,255,255,0.07);
+  --ax-border-strong: rgba(255,255,255,0.12);
+  --ax-t1: #F0F4FF;
+  --ax-t2: #8FA3C8;
+  --ax-t3: #3D5080;
+  --ax-blue: #1A4FD6;
+  --ax-blue-bright: #3B6CFF;
+  --ax-cyan: #0ABDD4;
+  --ax-card-shadow: 0 4px 16px rgba(0,0,0,0.3);
 }
 
 @layer base {
@@ -124,63 +152,32 @@
   }
   body {
     @apply bg-background text-foreground;
+    background: var(--ax-bg);
+    color: var(--ax-t1);
+    transition: background-color 0.2s ease, color 0.2s ease;
   }
   html {
     @apply font-sans;
   }
 }
-/* ============================================================
-   AXION DESIGN TOKENS
-   ============================================================ */
 
+.bg-surface { background: var(--ax-bg); }
+.bg-surface-2 { background: var(--ax-bg2); }
+.bg-surface-3 { background: var(--ax-bg3); }
+.border-default { border-color: var(--ax-border); }
+.text-primary { color: var(--ax-t1); }
+.text-secondary { color: var(--ax-t2); }
+.text-tertiary { color: var(--ax-t3); }
 
-
-:root {
-  --ax-blue: #1A4FD6;
-  --ax-cyan: #0ABDD4;
-  --ax-bg: #06060F;
-  --ax-bg2: #0C0C1A;
-  --ax-bg3: #111120;
-  --ax-border: rgba(255,255,255,0.055);
-  --ax-t1: #F0F4FF;
-  --ax-t2: #8FA3C8;
-  --ax-t3: #3D5080;
-}
-
-/* Orbital brand background */
-.orbital-bg::before {
-  content: '';
-  position: fixed;
-  top: -200px; left: -100px;
-  width: 600px; height: 600px;
-  border: 0.5px solid rgba(26,79,214,0.07);
-  border-radius: 50% / 30%;
-  transform: rotate(-22deg);
-  pointer-events: none;
-  z-index: 0;
-}
-.orbital-bg::after {
-  content: '';
-  position: fixed;
-  top: -60px; left: -150px;
-  width: 800px; height: 300px;
-  border: 0.5px solid rgba(10,189,212,0.05);
-  border-radius: 50% / 20%;
-  transform: rotate(18deg);
-  pointer-events: none;
-  z-index: 0;
-}
-
-/* Logo gradient text */
 .logo-gradient {
-  background: linear-gradient(90deg, #F0F4FF 0%, #A8C4FF 100%);
+  background: linear-gradient(90deg, var(--ax-t1) 0%, var(--ax-blue-bright) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
-/* Nav active indicator */
-.nav-active::before {
+.nav-active::before,
+.nav-active-bar::before {
   content: '';
   position: absolute;
   left: 0; top: 50%;
@@ -190,8 +187,13 @@
   background: linear-gradient(180deg, var(--ax-blue), var(--ax-cyan));
 }
 
-/* Metric card hover gradient top border */
-.metric-card::before {
+.metric-card,
+.metric-card-glow {
+  position: relative;
+  overflow: hidden;
+}
+.metric-card::before,
+.metric-card-glow::before {
   content: '';
   position: absolute;
   top: 0; left: 0; right: 0;
@@ -200,6 +202,19 @@
   opacity: 0;
   transition: opacity 0.2s;
 }
-.metric-card:hover::before {
-  opacity: 0.6;
+.metric-card:hover::before,
+.metric-card-glow:hover::before {
+  opacity: 0.7;
 }
+
+@keyframes skeleton-pulse {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 0.8; }
+}
+.skeleton {
+  animation: skeleton-pulse 1.6s ease-in-out infinite;
+  background: var(--ax-bg3);
+}
+
+::-webkit-scrollbar { width: 3px; }
+::-webkit-scrollbar-thumb { background: var(--ax-border-strong); border-radius: 2px; }
