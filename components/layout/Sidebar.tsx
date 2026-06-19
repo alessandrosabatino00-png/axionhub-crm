@@ -62,7 +62,7 @@ export default function Sidebar({ role, agencyName }: SidebarProps) {
     <aside
       className="w-[228px] flex-shrink-0 flex flex-col h-screen fixed left-0 top-0"
       style={{
-        background: '#B8D4E8',
+        background: 'var(--ax-bg2)',
         borderRight: '0.5px solid var(--ax-border)',
         position: 'fixed',
       }}
@@ -91,7 +91,7 @@ export default function Sidebar({ role, agencyName }: SidebarProps) {
           </span>
           <span
             className="text-[8.5px] uppercase tracking-[2px] mt-0.5"
-            style={{ color: '#4A6A8A' }}
+            style={{ color: 'var(--ax-t3)' }}
           >
             Real Estate Intelligence
           </span>
@@ -102,7 +102,7 @@ export default function Sidebar({ role, agencyName }: SidebarProps) {
         className="flex items-center gap-1.5 px-4 py-1.5 text-[10px]"
         style={{
           borderBottom: '0.5px solid var(--ax-border)',
-          color: '#4A6A8A',
+          color: 'var(--ax-t3)',
           background: 'rgba(10,189,212,0.02)',
         }}
       >
@@ -115,7 +115,7 @@ export default function Sidebar({ role, agencyName }: SidebarProps) {
           <div key={group.label} className="px-2 mb-1">
             <div
               className="text-[9px] font-bold uppercase tracking-[1.2px] px-2.5 pt-3 pb-1.5"
-              style={{ color: '#4A6A8A' }}
+              style={{ color: 'var(--ax-t3)' }}
             >
               {group.label}
             </div>
@@ -167,7 +167,7 @@ export default function Sidebar({ role, agencyName }: SidebarProps) {
         <button
           onClick={handleSignOut}
           className="flex items-center gap-2.5 px-2.5 py-[7px] rounded-[7px] w-full transition-all text-[12.5px]"
-          style={{ color: '#2D4A6B' }}
+          style={{ color: 'var(--ax-t2)' }}
           onMouseEnter={e => (e.currentTarget.style.background = 'rgba(239,68,68,0.08)')}
           onMouseLeave={e => (e.currentTarget.style.background = 'transparent')}
         >
