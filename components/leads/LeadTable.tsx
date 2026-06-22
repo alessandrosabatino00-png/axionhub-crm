@@ -3,6 +3,8 @@
 import { useState, useEffect } from 'react'
 import { supabase } from '@/lib/supabase'
 import StatusBadge from '@/components/ui/StatusBadge'
+import { EmptyState } from '@/components/ui/EmptyState'
+import { Inbox } from 'lucide-react'
 
 const STATUSES = ['new', 'contacted', 'meeting', 'mandate', 'lost']
 
@@ -18,8 +20,8 @@ function timeAgo(dateStr: string) {
 function rowBg(lead: any) {
   if (lead.status !== 'new') return 'transparent'
   const hours = (Date.now() - new Date(lead.status_updated_at).getTime()) / 3600000
-  if (hours >= 48) return '#450A0A22'
-  if (hours >= 2) return '#451A0322'
+  if (hours >= 48) return 'rgba(239,68,68,0.06)'
+  if (hours >= 2) return 'rgba(245,158,11,0.05)'
   return 'transparent'
 }
 
@@ -35,7 +37,6 @@ export default function LeadTable({ initialLeads, agencyId, userId }: LeadTableP
   const [savingNote, setSavingNote] = useState<string | null>(null)
   const [filter, setFilter] = useState('all')
 
-  // Realtime: nuovi lead in cima senza refresh
   useEffect(() => {
     const channel = supabase
       .channel('leads-realtime')
@@ -89,18 +90,17 @@ export default function LeadTable({ initialLeads, agencyId, userId }: LeadTableP
 
   return (
     <div className="space-y-4">
-      {/* Filtri pill */}
       <div className="flex gap-2">
         {filters.map(f => (
           <button
             key={f.key}
             onClick={() => setFilter(f.key)}
-            className="px-3 py-1 rounded-full text-xs font-medium transition-colors"
+            className="px-3 py-1 rounded-full text-[11px] font-medium transition-colors"
             style={{
-              backgroundColor: filter === f.key ? '#4F46E5' : '#16161F',
-              color: filter === f.key ? '#FFFFFF' : '#CBD5E1',
+              background: filter === f.key ? 'var(--ax-blue)' : 'var(--ax-bg2)',
+              color: filter === f.key ? '#FFFFFF' : 'var(--ax-t2)',
               border: '0.5px solid',
-              borderColor: filter === f.key ? '#4F46E5' : '#1E293B'
+              borderColor: filter === f.key ? 'var(--ax-blue)' : 'var(--ax-border)'
             }}
           >
             {f.label}
@@ -108,80 +108,78 @@ export default function LeadTable({ initialLeads, agencyId, userId }: LeadTableP
         ))}
       </div>
 
-      {/* Tabella */}
-      <div className="rounded-xl border overflow-hidden" style={{ borderColor: '#1E293B', borderWidth: '0.5px' }}>
-        <table className="w-full text-sm">
-          <thead>
-            <tr style={{ backgroundColor: '#16161F', borderBottom: '0.5px solid #1E293B' }}>
-              {['Proprietario', 'Immobile', 'Classe', 'Valore', 'Stato', 'Ricevuto', 'Note'].map(h => (
-                <th key={h} className="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider" style={{ color: '#CBD5E1' }}>
-                  {h}
-                </th>
-              ))}
-            </tr>
-          </thead>
-          <tbody>
-            {filtered.length === 0 && (
-              <tr>
-                <td colSpan={7} className="px-4 py-12 text-center" style={{ color: '#CBD5E1' }}>
-                  Nessun lead in questa categoria.
-                </td>
+      <div className="rounded-[12px] overflow-hidden" style={{ border: '0.5px solid var(--ax-border)' }}>
+        {filtered.length === 0 ? (
+          <div style={{ background: 'var(--ax-bg2)' }}>
+            <EmptyState icon={Inbox} title="Nessun lead in questa categoria" />
+          </div>
+        ) : (
+          <table className="w-full text-sm">
+            <thead>
+              <tr style={{ background: 'var(--ax-bg2)', borderBottom: '0.5px solid var(--ax-border)' }}>
+                {['Proprietario', 'Immobile', 'Classe', 'Valore', 'Stato', 'Ricevuto', 'Note'].map(h => (
+                  <th key={h} className="px-4 py-3 text-left text-[10px] font-semibold uppercase tracking-[0.6px]" style={{ color: 'var(--ax-t3)' }}>
+                    {h}
+                  </th>
+                ))}
               </tr>
-            )}
-            {filtered.map((lead: any) => (
-              <tr key={lead.id} style={{ backgroundColor: rowBg(lead), borderBottom: '0.5px solid #1E293B' }}>
-                <td className="px-4 py-3">
-                  <div className="font-medium text-white">{lead.name}</div>
-                  <div className="text-xs" style={{ color: '#CBD5E1' }}>{lead.phone}</div>
-                </td>
-                <td className="px-4 py-3" style={{ color: '#CBD5E1' }}>
-                  <div>{lead.address || lead.cap || '—'}</div>
-                  <div className="text-xs">{lead.property_type || ''}</div>
-                </td>
-                <td className="px-4 py-3">
-                  <StatusBadge status={lead.lead_class} type="class" />
-                </td>
-                <td className="px-4 py-3" style={{ color: '#CBD5E1' }}>
-                  {lead.estimated_value ? `€${Number(lead.estimated_value).toLocaleString('it-IT')}` : '—'}
-                </td>
-                <td className="px-4 py-3">
-                  <select
-                    value={lead.status}
-                    onChange={e => handleStatusChange(lead.id, e.target.value)}
-                    className="text-xs rounded px-2 py-1 border-0 outline-none cursor-pointer"
-                    style={{ backgroundColor: '#0A0A14', color: '#FFFFFF', border: '0.5px solid #1E293B' }}
-                  >
-                    {STATUSES.map(s => (
-                      <option key={s} value={s}>{s}</option>
-                    ))}
-                  </select>
-                </td>
-                <td className="px-4 py-3 text-xs" style={{ color: '#CBD5E1' }}>
-                  {timeAgo(lead.created_at)}
-                </td>
-                <td className="px-4 py-3">
-                  <div className="flex gap-2 items-center">
-                    <input
-                      type="text"
-                      placeholder="Aggiungi nota..."
-                      value={notes[lead.id] ?? lead.notes ?? ''}
-                      onChange={e => setNotes(prev => ({ ...prev, [lead.id]: e.target.value }))}
-                      className="text-xs rounded px-2 py-1 w-32"
-                      style={{ backgroundColor: '#0A0A14', color: '#FFFFFF', border: '0.5px solid #1E293B' }}
-                    />
-                    <button
-                      onClick={() => handleNoteSave(lead.id)}
-                      className="text-xs px-2 py-1 rounded"
-                      style={{ backgroundColor: '#4F46E5', color: '#FFFFFF' }}
+            </thead>
+            <tbody>
+              {filtered.map((lead: any) => (
+                <tr key={lead.id} style={{ background: rowBg(lead), borderBottom: '0.5px solid var(--ax-border)' }}>
+                  <td className="px-4 py-3">
+                    <div className="font-medium text-[13px]" style={{ color: 'var(--ax-t1)' }}>{lead.name}</div>
+                    <div className="text-[11px]" style={{ color: 'var(--ax-t3)' }}>{lead.phone}</div>
+                  </td>
+                  <td className="px-4 py-3 text-[12px]" style={{ color: 'var(--ax-t2)' }}>
+                    <div>{lead.address || lead.cap || '—'}</div>
+                    <div className="text-[11px]" style={{ color: 'var(--ax-t3)' }}>{lead.property_type || ''}</div>
+                  </td>
+                  <td className="px-4 py-3">
+                    <StatusBadge status={lead.lead_class} type="class" />
+                  </td>
+                  <td className="px-4 py-3 font-mono text-[12px]" style={{ color: 'var(--ax-t2)' }}>
+                    {lead.estimated_value ? `€${Number(lead.estimated_value).toLocaleString('it-IT')}` : '—'}
+                  </td>
+                  <td className="px-4 py-3">
+                    <select
+                      value={lead.status}
+                      onChange={e => handleStatusChange(lead.id, e.target.value)}
+                      className="text-[11px] rounded-[6px] px-2 py-1 border-0 outline-none cursor-pointer"
+                      style={{ background: 'var(--ax-bg3)', color: 'var(--ax-t1)', border: '0.5px solid var(--ax-border)' }}
                     >
-                      {savingNote === lead.id ? '...' : '✓'}
-                    </button>
-                  </div>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+                      {STATUSES.map(s => (
+                        <option key={s} value={s}>{s}</option>
+                      ))}
+                    </select>
+                  </td>
+                  <td className="px-4 py-3 text-[11px] font-mono" style={{ color: 'var(--ax-t3)' }}>
+                    {timeAgo(lead.created_at)}
+                  </td>
+                  <td className="px-4 py-3">
+                    <div className="flex gap-2 items-center">
+                      <input
+                        type="text"
+                        placeholder="Aggiungi nota..."
+                        value={notes[lead.id] ?? lead.notes ?? ''}
+                        onChange={e => setNotes(prev => ({ ...prev, [lead.id]: e.target.value }))}
+                        className="text-[11px] rounded-[6px] px-2 py-1 w-32"
+                        style={{ background: 'var(--ax-bg3)', color: 'var(--ax-t1)', border: '0.5px solid var(--ax-border)' }}
+                      />
+                      <button
+                        onClick={() => handleNoteSave(lead.id)}
+                        className="text-[11px] px-2 py-1 rounded-[6px]"
+                        style={{ background: 'var(--ax-blue)', color: '#FFFFFF' }}
+                      >
+                        {savingNote === lead.id ? '...' : '✓'}
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        )}
       </div>
     </div>
   )

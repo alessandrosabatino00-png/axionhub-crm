@@ -1,6 +1,8 @@
 import { createClient } from '@supabase/supabase-js'
 import { createServerClient } from '@supabase/ssr'
 import { cookies } from 'next/headers'
+import MetricCard from '@/components/ui/MetricCard'
+import { PageHeader } from '@/components/ui/PageHeader'
 
 async function getPerformance() {
   const cookieStore = await cookies()
@@ -40,7 +42,6 @@ async function getPerformance() {
   const classA = leads.filter(l => l.lead_class === 'A').length
   const classB = leads.filter(l => l.lead_class === 'B').length
 
-  // Tempo medio risposta in minuti
   const responseTimes = leads
     .filter(l => l.first_contact_at)
     .map(l => (new Date(l.first_contact_at).getTime() - new Date(l.created_at).getTime()) / 60000)
@@ -59,45 +60,27 @@ export default async function AgencyPerformance() {
   const stats = await getPerformance()
   if (!stats) return null
 
-  const metrics = [
-    { label: 'Lead totali', value: stats.total, color: '#FFFFFF' },
-    { label: 'Contattati', value: `${stats.contactRate}%`, color: '#06B6D4' },
-    { label: 'Mandati', value: stats.mandates, color: '#10B981' },
-    { label: 'Tasso conversione', value: `${stats.convRate}%`, color: '#4F46E5' },
-    { label: 'Lead A ricevuti', value: stats.classA, color: '#10B981' },
-    { label: 'Lead B ricevuti', value: stats.classB, color: '#60A5FA' },
-    { label: 'Persi', value: stats.lost, color: '#EF4444' },
-    {
-      label: 'Tempo medio risposta',
-      value: stats.avgResponse
-        ? stats.avgResponse < 60
-          ? `${stats.avgResponse}m`
-          : `${Math.floor(stats.avgResponse / 60)}h ${stats.avgResponse % 60}m`
-        : '—',
-      color: '#F59E0B'
-    },
-  ]
+  const responseLabel = stats.avgResponse
+    ? stats.avgResponse < 60
+      ? `${stats.avgResponse}m`
+      : `${Math.floor(stats.avgResponse / 60)}h ${stats.avgResponse % 60}m`
+    : '—'
 
   return (
-    <div className="space-y-6">
-      <div>
-        <h1 className="text-2xl font-bold text-white">Performance</h1>
-        <p className="text-sm mt-1" style={{ color: '#CBD5E1' }}>
-          Le tue statistiche complessive
-        </p>
-      </div>
+    <div>
+      <PageHeader title="Performance" subtitle="Le tue statistiche complessive" />
 
-      <div className="grid grid-cols-4 gap-4">
-        {metrics.map(m => (
-          <div
-            key={m.label}
-            className="rounded-xl border p-5"
-            style={{ backgroundColor: '#16161F', borderColor: '#1E293B', borderWidth: '0.5px' }}
-          >
-            <p className="text-xs font-medium uppercase tracking-wider" style={{ color: '#CBD5E1' }}>{m.label}</p>
-            <p className="text-3xl font-bold mt-2" style={{ color: m.color }}>{m.value}</p>
-          </div>
-        ))}
+      <div className="grid grid-cols-4 rounded-[12px] overflow-hidden" style={{ border: '0.5px solid var(--ax-border)' }}>
+        <MetricCard label="Lead totali" value={stats.total} />
+        <MetricCard label="Contattati" value={`${stats.contactRate}%`} />
+        <MetricCard label="Mandati" value={stats.mandates} sub="contratti firmati" />
+        <MetricCard label="Tasso conversione" value={`${stats.convRate}%`} showBorder={false} />
+      </div>
+      <div className="grid grid-cols-4 rounded-[12px] overflow-hidden mt-4" style={{ border: '0.5px solid var(--ax-border)' }}>
+        <MetricCard label="Lead A ricevuti" value={stats.classA} />
+        <MetricCard label="Lead B ricevuti" value={stats.classB} />
+        <MetricCard label="Persi" value={stats.lost} critical={stats.lost > 0} />
+        <MetricCard label="Tempo medio risposta" value={responseLabel} showBorder={false} sub="first contact" />
       </div>
     </div>
   )

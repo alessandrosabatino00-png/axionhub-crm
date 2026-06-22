@@ -2,6 +2,7 @@ import { cookies } from 'next/headers'
 import { createServerClient } from '@supabase/ssr'
 import { createClient } from '@supabase/supabase-js'
 import LeadTable from '@/components/leads/LeadTable'
+import { PageHeader } from '@/components/ui/PageHeader'
 
 async function getLeads() {
   const cookieStore = await cookies()
@@ -47,13 +48,8 @@ export default async function AgencyLeadsPage() {
   if (!data) return null
 
   return (
-    <div className="space-y-6">
-      <div>
-        <h1 className="text-2xl font-bold text-white">I miei lead</h1>
-        <p className="text-sm mt-1" style={{ color: '#CBD5E1' }}>
-          {data.leads.length} lead totali
-        </p>
-      </div>
+    <div>
+      <PageHeader title="I miei lead" subtitle={`${data.leads.length} lead totali`} live />
       <LeadTable
         initialLeads={data.leads}
         agencyId={data.agencyId}
