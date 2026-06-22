@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react'
 import { PageHeader } from '@/components/ui/PageHeader'
 import MetricCard from '@/components/ui/MetricCard'
+import { Skeleton } from '@/components/ui/LoadingSkeleton'
 
 interface FunnelStep {
   label: string
@@ -86,7 +87,14 @@ export default function FunnelPage() {
         >
           <h2 className="text-[13px] font-semibold" style={{ color: 'var(--ax-t1)' }}>Fasi del funnel</h2>
           {loading ? (
-            <p className="text-[12px]" style={{ color: 'var(--ax-t3)' }}>Caricamento...</p>
+            <div className="space-y-4">
+              {Array.from({ length: 5 }).map((_, i) => (
+                <div key={i} className="space-y-1.5">
+                  <div className="flex justify-between"><Skeleton className="h-[12px] w-28" /><Skeleton className="h-[12px] w-10" /></div>
+                  <Skeleton className="h-[6px] w-full" />
+                </div>
+              ))}
+            </div>
           ) : (
             steps.map((step, i) => {
               const pct = Math.round((step.value / max) * 100)

@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import { PageHeader } from '@/components/ui/PageHeader'
 import { EmptyState } from '@/components/ui/EmptyState'
 import { FileText, Download } from 'lucide-react'
+import { MetricCardSkeleton, TableSkeleton } from '@/components/ui/LoadingSkeleton'
 
 interface Lead {
   id: string
@@ -121,7 +122,7 @@ export default function BillingPage() {
       </div>
 
       {loading ? (
-        <p style={{ color: 'var(--ax-t3)' }} className="text-[12px]">Caricamento...</p>
+        <TableSkeleton rows={3} />
       ) : billing.length === 0 ? (
         <div className="rounded-[12px]" style={{ background: 'var(--ax-bg2)', border: '0.5px solid var(--ax-border)' }}>
           <EmptyState icon={FileText} title="Nessun dato per questo mese" />
