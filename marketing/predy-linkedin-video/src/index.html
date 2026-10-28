@@ -1,0 +1,332 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<title>Predy LinkedIn</title>
+<style>
+@font-face { font-family: "Jakarta"; src: url("fonts/pjs.ttf") format("truetype"); font-weight: 200 800; }
+@font-face { font-family: "Inter"; src: url("fonts/inter/InterVariable.ttf") format("truetype"); font-weight: 100 900; }
+:root {
+  --tiffany: #A7E6D8; --teal: #0F2D2E; --light: #F6FBFA; --neutral: #E8E4DE;
+  --muted-d: rgba(15,45,46,.62); --muted-l: rgba(246,251,250,.62);
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { width: 1080px; height: 1920px; overflow: hidden; background: #000; }
+#stage { position: relative; width: 1080px; height: 1920px; overflow: hidden; background: var(--light);
+  font-family: "Inter", sans-serif; color: var(--teal); -webkit-font-smoothing: antialiased; }
+.layer { position: absolute; inset: 0; }
+.scene { position: absolute; inset: 0; opacity: 0; }
+.abs { position: absolute; left: 80px; right: 80px; }
+.h { font-family: "Jakarta", sans-serif; font-weight: 800; letter-spacing: -0.025em; line-height: 1.08; }
+.eyebrow { font-family: "Inter"; font-weight: 600; font-size: 34px; letter-spacing: .22em; text-transform: uppercase; }
+.num { font-family: "Jakarta"; font-weight: 800; letter-spacing: -0.05em; line-height: .9; font-variant-numeric: tabular-nums; word-spacing: .12em; }
+.lbl { font-family: "Inter"; font-weight: 500; font-size: 62px; line-height: 1.16; letter-spacing: -0.015em; }
+.note { font-family: "Inter"; font-size: 32px; font-weight: 500; line-height: 1.35; }
+.sample { font-family: "Inter"; font-size: 40px; font-weight: 700; letter-spacing: -0.01em; }
+.w { display: inline-block; white-space: pre; }
+.bar { position: absolute; height: 26px; border-radius: 13px; overflow: hidden; }
+.bar i { position: absolute; left: 0; top: 0; bottom: 0; border-radius: 13px; display: block; }
+.dot { position: absolute; width: 150px; height: 150px; border-radius: 50%; }
+/* header */
+#hdr { position: absolute; left: 80px; top: 168px; height: 64px; display: flex; align-items: center; gap: 18px; }
+#hdr svg { height: 60px; width: auto; }
+#hdr span { font-family: "Jakarta"; font-weight: 800; font-size: 50px; letter-spacing: -0.035em; }
+#hdrR { position: absolute; right: 80px; top: 186px; font-size: 30px; font-weight: 600; letter-spacing: .18em; }
+/* caption */
+#cap { position: absolute; left: 80px; right: 80px; bottom: 250px; display: flex; justify-content: center; }
+#cap div { background: rgba(15,45,46,.94); color: #F6FBFA; font-family: "Inter"; font-weight: 600; font-size: 50px;
+  line-height: 1.28; padding: 22px 34px 24px; border-radius: 26px; text-align: center; max-width: 920px;
+  border: 2px solid rgba(167,230,216,.45); letter-spacing: -0.01em; }
+/* path */
+.node { position: absolute; left: 80px; width: 110px; height: 110px; border-radius: 50%; display: flex; align-items: center;
+  justify-content: center; font-family: "Jakarta"; font-weight: 800; font-size: 52px; }
+.step { position: absolute; left: 240px; right: 80px; }
+.step b { display: block; font-family: "Jakarta"; font-weight: 800; font-size: 64px; letter-spacing: -0.025em; line-height: 1.05; }
+.step small { display: block; font-size: 36px; font-weight: 500; margin-top: 10px; line-height: 1.3; }
+.pill { display: inline-block; border-radius: 999px; }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute">
+  <defs>
+    <symbol id="mark" viewBox="0 0 100 120">
+      <path fill-rule="evenodd" d="M0 41 L50 0 L100 41 L100 86 L42 86 L42 120 L0 120 Z M42 48 L64 48 L64 66 L42 66 Z"/>
+    </symbol>
+  </defs>
+</svg>
+<div id="stage">
+  <div class="layer" id="bg"></div>
+  <!-- decorative brand chevron -->
+  <svg class="layer" id="chev" viewBox="0 0 1080 1920" style="opacity:0">
+    <path id="chevp" d="M300 900 L1240 160 L1240 520 L540 1070 Z" fill="currentColor"/>
+  </svg>
+
+  <div id="hdr"><svg viewBox="0 0 100 120"><use href="#mark" fill="currentColor"/></svg><span>Predy</span></div>
+  <div id="hdrR"></div>
+
+  <!-- S1 hook 0-6 -->
+  <div class="scene" id="s1" style="color:var(--light)">
+    <div class="abs eyebrow" id="s1e" style="top:360px;color:var(--tiffany)">Prima di vendere</div>
+    <div class="abs h" id="s1h" style="top:440px;font-size:80px"></div>
+    <div class="abs num" id="s1n" style="top:870px;font-size:250px;color:var(--tiffany)">3–8%</div>
+    <div class="abs h" id="s1v" style="top:1130px;font-size:80px">del valore di casa.</div>
+    <div class="abs note" id="s1f" style="top:1270px;color:var(--muted-l)">Stima raccolta nelle interviste dirette<br>con proprietari e agenzie · non campione statistico</div>
+  </div>
+
+  <!-- S2 owners 6-20 -->
+  <div class="scene" id="s2">
+    <div class="abs eyebrow" style="top:340px;color:var(--muted-d)">Il problema · proprietari</div>
+    <div id="s2slides"></div>
+    <div class="abs" id="s2meta" style="top:1250px">
+      <div class="sample">17 proprietari intervistati</div>
+      <div class="note" style="margin-top:12px;color:var(--muted-d)">Interviste dirette, non campione statistico</div>
+    </div>
+  </div>
+
+  <!-- S3 agencies 20-32 -->
+  <div class="scene" id="s3">
+    <div class="abs eyebrow" style="top:340px;color:var(--muted-d)">Lato agenzie</div>
+    <div id="s3a">
+      <div class="abs num" id="s3an" style="top:440px;font-size:300px">0%</div>
+      <div class="abs lbl" style="top:780px">indica le obiezioni sulle commissioni come problema n.1</div>
+      <div class="bar" style="left:80px;right:80px;top:1090px;background:rgba(15,45,46,.12)"><i id="s3ab" style="background:var(--teal)"></i></div>
+    </div>
+    <div id="s3b">
+      <div class="abs num" id="s3bn" style="top:440px;font-size:270px">8 su 8</div>
+      <div class="abs lbl" style="top:760px">si affidano al passaparola</div>
+      <div id="dots"></div>
+    </div>
+    <div class="abs" style="top:1250px">
+      <div class="sample">8 agenzie intervistate a Torino</div>
+      <div class="note" style="margin-top:12px;color:var(--muted-d)">Interviste dirette, non campione statistico</div>
+    </div>
+  </div>
+
+  <!-- S4 path 32-40.5 -->
+  <div class="scene" id="s4">
+    <div class="abs eyebrow" style="top:340px;color:var(--muted-d)">Cosa stiamo costruendo</div>
+    <div class="abs h" id="s4t" style="top:400px;font-size:66px">Un percorso in 4 tappe per chi vende casa</div>
+    <div id="line" style="position:absolute;left:132px;width:6px;top:680px;height:0;background:var(--teal);border-radius:3px"></div>
+    <div id="steps"></div>
+  </div>
+
+  <!-- S4b statement 40.5-46 -->
+  <div class="scene" id="s4b">
+    <div class="abs h" id="s4b1" style="top:520px;font-size:92px">Predy prepara il&nbsp;proprietario.</div>
+    <div class="abs" id="s4bl" style="top:840px;height:8px;width:0;background:var(--teal);border-radius:4px"></div>
+    <div class="abs h" id="s4b2" style="top:920px;font-size:92px">L'agenzia incontra un cliente informato.</div>
+  </div>
+
+  <!-- S5 status 46-55 -->
+  <div class="scene" id="s5" style="color:var(--light)">
+    <div class="abs eyebrow" style="top:340px;color:var(--tiffany)">A che punto siamo</div>
+    <div id="s5r1">
+      <svg class="abs" style="top:430px;left:80px;width:120px;height:120px" viewBox="0 0 120 120">
+        <circle cx="60" cy="60" r="56" fill="#A7E6D8"/>
+        <path id="chk" d="M34 62 L52 80 L88 42" fill="none" stroke="#0F2D2E" stroke-width="11" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="80" stroke-dashoffset="80"/>
+      </svg>
+      <div class="abs h" style="top:590px;font-size:88px">Il problema<br>è validato.</div>
+    </div>
+    <div id="s5r2">
+      <svg class="abs" style="top:880px;left:80px;width:120px;height:120px" viewBox="0 0 120 120">
+        <circle cx="60" cy="60" r="50" fill="none" stroke="rgba(167,230,216,.22)" stroke-width="12"/>
+        <circle id="ring" cx="60" cy="60" r="50" fill="none" stroke="#A7E6D8" stroke-width="12" stroke-linecap="round"
+          stroke-dasharray="314.16" stroke-dashoffset="314.16" transform="rotate(-90 60 60)"/>
+      </svg>
+      <div class="pill" id="beta" style="position:absolute;left:236px;top:912px;background:var(--tiffany);color:var(--teal);font-weight:700;font-size:34px;letter-spacing:.18em;padding:12px 26px">BETA</div>
+      <div class="abs h" style="top:1040px;font-size:70px;font-weight:700">La soluzione è in beta con le prime agenzie di&nbsp;Torino.</div>
+    </div>
+    <div class="abs note" id="s5f" style="top:1330px;color:var(--muted-l)">Basato su 17 proprietari e 8 agenzie · interviste dirette, non campione statistico</div>
+  </div>
+
+  <!-- S6 close 55-60 -->
+  <div class="scene" id="s6">
+    <div id="s6logo" style="position:absolute;left:0;right:0;top:330px;display:flex;align-items:center;justify-content:center;gap:30px">
+      <svg viewBox="0 0 100 120" style="height:150px;width:125px"><use href="#mark" fill="#0F2D2E"/></svg>
+      <span style="font-family:Jakarta;font-weight:800;font-size:150px;letter-spacing:-0.04em;line-height:1">Predy</span>
+    </div>
+    <div class="abs h" id="s6a" style="top:640px;font-size:84px;text-align:center">Sei un'agenzia di&nbsp;Torino?</div>
+    <div class="abs lbl" id="s6b" style="top:860px;text-align:center;font-size:62px">Scrivimi per entrare nel beta gratuito.</div>
+    <div id="s6c" style="position:absolute;left:0;right:0;top:1110px;text-align:center">
+      <span class="pill" style="background:var(--teal);color:var(--tiffany);font-family:Jakarta;font-weight:800;font-size:80px;padding:22px 64px;letter-spacing:-0.02em">predy.it</span>
+    </div>
+    <div class="abs eyebrow" id="s6d" style="top:1320px;text-align:center;font-size:30px;color:var(--muted-d)">Prima di vendere, scegli meglio.</div>
+  </div>
+
+  <div id="cap"><div id="capt" style="opacity:0"></div></div>
+</div>
+<script src="cues.js"></script>
+<script>
+const $ = id => document.getElementById(id);
+const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
+const seg = (t, a, b) => clamp((t - a) / (b - a));
+const eOut = p => 1 - Math.pow(1 - p, 3);
+const eIO = p => p < .5 ? 4 * p * p * p : 1 - Math.pow(-2 * p + 2, 3) / 2;
+const eBack = p => { const c = 1.4; return 1 + (c + 1) * Math.pow(p - 1, 3) + c * Math.pow(p - 1, 2); };
+const mix = (a, b, p) => a + (b - a) * p;
+const hex = h => [1, 3, 5].map(i => parseInt(h.slice(i, i + 2), 16));
+const mixC = (a, b, p) => { const A = hex(a), B = hex(b); return `rgb(${A.map((v, i) => Math.round(mix(v, B[i], p))).join(",")})`; };
+// in/out helper: element visible in [a,b] with rise-in and fade-out
+function io(el, t, a, b, { rise = 50, fin = .55, fout = .35, scale = 0 } = {}) {
+  const pin = eOut(seg(t, a, a + fin)), pout = eIO(seg(t, b - fout, b));
+  const o = pin * (1 - pout);
+  el.style.opacity = o;
+  el.style.transform = `translateY(${(1 - pin) * rise - pout * 30}px) scale(${1 - (1 - pin) * scale})`;
+  return o;
+}
+
+// ---- build dynamic parts
+const hookWords = "Chi arriva impreparato all'appuntamento con l'agente rischia di perdere".split(" ");
+$("s1h").innerHTML = hookWords.map(w => `<span class="w">${w} </span>`).join("");
+
+const OWN = [
+  { v: 78, pre: "", txt: "dei proprietari stima il valore di casa a&nbsp;occhio" },
+  { v: 44, pre: "", txt: "non fa nessuna ricerca prima di&nbsp;vendere" },
+  { v: 41, pre: "~", txt: "ha venduto a un risultato peggiore delle&nbsp;attese" },
+];
+$("s2slides").innerHTML = OWN.map((d, i) => `
+  <div id="o${i}" style="position:absolute;inset:0;opacity:0">
+    <div class="abs num" id="o${i}n" style="top:440px;font-size:300px">0%</div>
+    <div class="abs lbl" style="top:780px">${d.txt}</div>
+    <div class="bar" style="left:80px;right:80px;top:1090px;background:rgba(15,45,46,.12)"><i id="o${i}b" style="background:var(--teal)"></i></div>
+  </div>`).join("") +
+  `<div class="abs" style="top:1160px;display:flex;gap:14px" id="pager">${OWN.map((_, i) => `<i id="pg${i}" style="display:block;height:8px;border-radius:4px;background:var(--teal)"></i>`).join("")}</div>`;
+
+$("dots").innerHTML = Array.from({ length: 8 }, (_, i) => {
+  const x = 80 + (i % 4) * 236, y = 930 + Math.floor(i / 4) * 0;
+  return `<svg class="dot" id="d${i}" viewBox="0 0 100 120" style="left:${x + 30}px;top:${960}px;width:${100}px;height:${120}px;border-radius:0"><use href="#mark"/></svg>`;
+}).join("");
+// two rows of 4 houses
+for (let i = 0; i < 8; i++) { const d = $("d" + i); d.style.left = (80 + (i % 4) * 236 + 60) + "px"; d.style.top = (880 + Math.floor(i / 4) * 150) + "px"; d.style.width = "92px"; d.style.height = "110px"; }
+
+const STEPS = [
+  ["Stima", "Una forchetta di valore, non un prezzo"],
+  ["Situazione", "Tempi, obiettivi e vincoli di chi vende"],
+  ["Documenti", "Cosa preparare, in una checklist chiara"],
+  ["Passi verso il rogito", "Cosa succede e in che ordine"],
+];
+const STEP_Y = [680, 900, 1120, 1340];
+$("steps").innerHTML = STEPS.map((s, i) => `
+  <div class="node" id="n${i}" style="top:${STEP_Y[i] - 55}px">${i + 1}</div>
+  <div class="step" id="st${i}" style="top:${STEP_Y[i] - 50}px"><b>${s[0]}</b><small style="color:var(--muted-d)">${s[1]}</small></div>`).join("");
+
+// ---- scenes: [id, start, end, bg, fg]
+const SC = [
+  ["s1", 0, 6, "#0F2D2E", "#F6FBFA", "#A7E6D8", ""],
+  ["s2", 6, 20, "#F6FBFA", "#0F2D2E", "#A7E6D8", "01 · Proprietari"],
+  ["s3", 20, 32, "#E8E4DE", "#0F2D2E", "#F6FBFA", "02 · Agenzie"],
+  ["s4", 32, 40.5, "#F6FBFA", "#0F2D2E", "#A7E6D8", "03 · Predy"],
+  ["s4b", 40.5, 46, "#A7E6D8", "#0F2D2E", "#F6FBFA", "03 · Predy"],
+  ["s5", 46, 55, "#0F2D2E", "#F6FBFA", "#A7E6D8", "04 · Stato"],
+  ["s6", 55, 60.5, "#A7E6D8", "#0F2D2E", "#F6FBFA", ""],
+];
+const TR = .45; // bg crossfade duration
+
+function render(t) {
+  // background + header colour
+  let cur = SC.findIndex(s => t >= s[1] && t < s[2]); if (cur < 0) cur = SC.length - 1;
+  const s = SC[cur], prev = SC[cur - 1];
+  const p = prev ? eIO(seg(t, s[1] - .05, s[1] + TR)) : 1;
+  const bg = prev ? mixC(prev[3], s[3], p) : s[3];
+  const fg = prev ? mixC(prev[4], s[4], p) : s[4];
+  $("bg").style.background = bg;
+  $("hdr").style.color = fg; $("hdrR").style.color = fg;
+  $("hdrR").textContent = s[6]; $("hdrR").style.opacity = .55 * eOut(seg(t, s[1] + .1, s[1] + .6)) * (s[6] ? 1 : 0);
+  const showHdr = t < 54.7 ? 1 : 1 - eIO(seg(t, 54.7, 55.2));
+  $("hdr").style.opacity = eOut(seg(t, .05, .5)) * showHdr;
+  // chevron decor
+  const ch = $("chev"); ch.style.color = prev ? mixC(prev[5], s[5], p) : s[5];
+  ch.style.opacity = s[0] === "s1" || s[0] === "s5" ? .07 : .38;
+  ch.style.transform = `translate(${-t * 4}px, ${t * 2.5}px)`;
+
+  // scene visibility
+  for (const [id, a, b] of SC) $(id).style.opacity = (t >= a - .01 && t < b + .01) ? 1 : 0;
+  // fade everything out at scene end
+  for (const [id, a, b] of SC) { const el = $(id); if (t >= a && t < b) { const o = 1 - eIO(seg(t, b - .3, b)); el.style.opacity = id === "s6" ? 1 : o; } }
+
+  // S1
+  if (t < 6.2) {
+    io($("s1e"), t, .15, 6);
+    hookWords.forEach((w, i) => { const a = .3 + i * .17; const pp = eOut(seg(t, a, a + .5)); const el = $("s1h").children[i]; el.style.opacity = pp; el.style.transform = `translateY(${(1 - pp) * 36}px)`; });
+    const pn = seg(t, 2.25, 3.1);
+    $("s1n").style.opacity = eOut(seg(t, 2.25, 2.6));
+    $("s1n").style.transform = `scale(${mix(.86, 1, eBack(pn))})`; $("s1n").style.transformOrigin = "left center";
+    const lo = Math.round(mix(0, 3, eOut(pn))), hi = Math.round(mix(0, 8, eOut(pn)));
+    $("s1n").textContent = `${lo}–${hi}%`;
+    io($("s1v"), t, 2.9, 6.2); io($("s1f"), t, 3.4, 6.2, { rise: 20 });
+  }
+  // S2
+  if (t >= 6 && t < 20.2) {
+    const D = 14 / 3;
+    OWN.forEach((d, i) => {
+      const a = 6 + i * D, b = a + D; const el = $("o" + i);
+      const pin = eOut(seg(t, a + .05, a + .6)), pout = i < 2 ? eIO(seg(t, b - .4, b)) : 0;
+      el.style.opacity = pin * (1 - pout);
+      el.style.transform = `translateY(${(1 - pin) * 60 - pout * 60}px)`;
+      const pc = eOut(seg(t, a + .15, a + 1.6));
+      $("o" + i + "n").textContent = d.pre + Math.round(d.v * pc) + "%";
+      $("o" + i + "b").style.width = (d.v * eIO(seg(t, a + .3, a + 1.9))) + "%";
+      $("pg" + i).style.width = (i === Math.min(2, Math.floor((t - 6) / D)) ? 64 : 22) + "px";
+      $("pg" + i).style.opacity = i === Math.min(2, Math.floor((t - 6) / D)) ? 1 : .25;
+    });
+    io($("s2meta"), t, 6.5, 30, { rise: 20 });
+  }
+  // S3
+  if (t >= 20 && t < 32.2) {
+    const pa = eOut(seg(t, 20.1, 20.7)), qa = eIO(seg(t, 25.6, 26));
+    $("s3a").style.opacity = pa * (1 - qa); $("s3a").style.transform = `translateY(${(1 - pa) * 60 - qa * 60}px)`;
+    $("s3an").textContent = Math.round(50 * eOut(seg(t, 20.3, 21.8))) + "%";
+    $("s3ab").style.width = (50 * eIO(seg(t, 20.5, 22.1))) + "%";
+    const pb = eOut(seg(t, 26.05, 26.6));
+    $("s3b").style.opacity = pb; $("s3b").style.transform = `translateY(${(1 - pb) * 60}px)`;
+    const k = Math.round(8 * eOut(seg(t, 26.2, 27.6)));
+    $("s3bn").textContent = `${k} su 8`;
+    for (let i = 0; i < 8; i++) { const pi = eBack(seg(t, 26.5 + i * .14, 26.9 + i * .14)); const d = $("d" + i); d.style.opacity = clamp(pi * 1.5); d.style.transform = `scale(${clamp(pi, 0, 1.3)})`; d.style.fill = "#0F2D2E"; }
+  }
+  // S4
+  if (t >= 32 && t < 40.7) {
+    io($("s4t"), t, 32.2, 50);
+    const lp = eIO(seg(t, 33, 38.2));
+    const L = STEP_Y[3] - STEP_Y[0];
+    $("line").style.height = (L * lp) + "px";
+    STEPS.forEach((_, i) => {
+      const at = 33 + (5.2 * i / 3) - (i ? .05 : 0);
+      const pn = eBack(seg(t, at, at + .45));
+      const n = $("n" + i); n.style.transform = `scale(${pn})`; n.style.background = "#A7E6D8"; n.style.color = "#0F2D2E"; n.style.boxShadow = "0 0 0 10px #F6FBFA";
+      const ps = eOut(seg(t, at + .1, at + .7));
+      const st = $("st" + i); st.style.opacity = ps; st.style.transform = `translateX(${(1 - ps) * 40}px)`;
+    });
+  }
+  // S4b
+  if (t >= 40.5 && t < 46.2) {
+    io($("s4b1"), t, 40.65, 50, { rise: 60 });
+    $("s4bl").style.width = (180 * eIO(seg(t, 41.6, 42.3))) + "px";
+    io($("s4b2"), t, 42.1, 50, { rise: 60 });
+  }
+  // S5
+  if (t >= 46 && t < 55.2) {
+    io($("s5r1"), t, 46.3, 60);
+    $("chk").setAttribute("stroke-dashoffset", 80 * (1 - eOut(seg(t, 46.8, 47.5))));
+    io($("s5r2"), t, 50.2, 60); io($("s5f"), t, 46.8, 60, { rise: 20 });
+    $("ring").setAttribute("stroke-dashoffset", 314.16 * (1 - .32 * eIO(seg(t, 50.7, 52))));
+    const bp = eBack(seg(t, 51.2, 51.7)); $("beta").style.transform = `scale(${bp})`; $("beta").style.transformOrigin = "left center";
+  }
+  // S6
+  if (t >= 55) {
+    io($("s6logo"), t, 55.15, 99, { rise: 40, scale: .08 });
+    io($("s6a"), t, 55.6, 99); io($("s6b"), t, 56.1, 99);
+    io($("s6c"), t, 56.6, 99, { scale: .1 }); io($("s6d"), t, 57.1, 99, { rise: 20 });
+  }
+
+  // captions
+  const c = CUES.find(q => t >= q[0] && t < q[1]);
+  const ce = $("capt");
+  if (c) { ce.textContent = c[2]; ce.style.opacity = Math.min(seg(t, c[0], c[0] + .15), 1 - seg(t, c[1] - .12, c[1])); }
+  else ce.style.opacity = 0;
+}
+window.render = render;
+const q = new URLSearchParams(location.search).get("t");
+document.fonts.ready.then(() => { render(q ? +q : 0); window.READY = true; });
+</script>
+</body>
+</html>
