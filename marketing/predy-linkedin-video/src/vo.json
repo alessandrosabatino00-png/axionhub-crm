@@ -1,0 +1,22 @@
+[
+ {"say": "Vendere casa senza prepararsi può costare dal tre all'otto per cento del suo valore.",
+  "show": ["Vendere casa senza prepararsi può costare", "dal 3 all'8% del suo valore."]},
+ {"say": "Abbiamo intervistato diciassette proprietari: il settantotto per cento stima il valore a occhio.",
+  "show": ["Abbiamo intervistato 17 proprietari:", "il 78% stima il valore a occhio."]},
+ {"say": "Il quarantaquattro per cento non fa nessuna ricerca prima di vendere.",
+  "show": ["Il 44% non fa nessuna ricerca", "prima di vendere."]},
+ {"say": "E circa quattro su dieci hanno venduto peggio delle attese.",
+  "show": ["E circa 4 su 10 hanno venduto", "peggio delle attese."]},
+ {"say": "Poi abbiamo ascoltato otto agenzie. Per la metà, il problema numero uno sono le obiezioni sulle commissioni.",
+  "show": ["Poi abbiamo ascoltato 8 agenzie.", "Per la metà, il problema n.1", "sono le obiezioni sulle commissioni."]},
+ {"say": "E tutte e otto si affidano al passaparola.",
+  "show": ["E tutte e 8 si affidano al passaparola."]},
+ {"say": "Per questo stiamo costruendo Predy: un percorso in quattro tappe. Stima. Situazione. Documenti. E i passi verso il rogito.",
+  "show": ["Per questo stiamo costruendo Predy:", "un percorso in 4 tappe.", "Stima. Situazione. Documenti.", "E i passi verso il rogito."]},
+ {"say": "Predy prepara il proprietario. Così l'agenzia incontra un cliente informato.",
+  "show": ["Predy prepara il proprietario.", "Così l'agenzia incontra un cliente informato."]},
+ {"say": "Siamo onesti: il problema l'abbiamo validato. Ora testiamo la soluzione, in beta con le prime agenzie di Torino.",
+  "show": ["Siamo onesti: il problema l'abbiamo validato.", "Ora testiamo la soluzione,", "in beta con le prime agenzie di Torino."]},
+ {"say": "Sei un'agenzia di Torino? Scrivimi per entrare nel beta gratuito.",
+  "show": ["Sei un'agenzia di Torino?", "Scrivimi per entrare nel beta gratuito."]}
+]

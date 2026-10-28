@@ -18,9 +18,9 @@ const FPS = 30, DUR = 60;
     }
   } else {
     const ff = spawn("ffmpeg", ["-y", "-loglevel", "error", "-f", "image2pipe", "-framerate", String(FPS), "-c:v", "png", "-i", "-",
-      "-f", "lavfi", "-i", "anullsrc=r=48000:cl=stereo", "-shortest",
+      ...(process.argv[4] ? ["-i", process.argv[4]] : ["-f", "lavfi", "-i", "anullsrc=r=48000:cl=stereo"]), "-shortest",
       "-c:v", "libx264", "-preset", "slow", "-crf", "16", "-profile:v", "high", "-pix_fmt", "yuv420p",
-      "-c:a", "aac", "-b:a", "128k", "-movflags", "+faststart", "-r", String(FPS), arg], { stdio: ["pipe", "inherit", "inherit"] });
+      "-c:a", "aac", "-b:a", "192k", "-movflags", "+faststart", "-r", String(FPS), arg], { stdio: ["pipe", "inherit", "inherit"] });
     for (let f = 0; f < FPS * DUR; f++) {
       await page.evaluate(t => render(t), f / FPS);
       const buf = await page.screenshot({ type: "png" });

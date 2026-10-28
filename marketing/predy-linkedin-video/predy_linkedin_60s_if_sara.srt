@@ -1,0 +1,91 @@
+1
+00:00:00,350 --> 00:00:03,204
+Vendere casa senza prepararsi può costare
+
+2
+00:00:03,204 --> 00:00:05,153
+dal 3 all'8% del suo valore.
+
+3
+00:00:06,100 --> 00:00:08,930
+Abbiamo intervistato 17 proprietari:
+
+4
+00:00:08,930 --> 00:00:11,445
+il 78% stima il valore a occhio.
+
+5
+00:00:11,645 --> 00:00:14,085
+Il 44% non fa nessuna ricerca
+
+6
+00:00:14,085 --> 00:00:15,516
+prima di vendere.
+
+7
+00:00:15,716 --> 00:00:17,676
+E circa 4 su 10 hanno venduto
+
+8
+00:00:17,676 --> 00:00:19,028
+peggio delle attese.
+
+9
+00:00:20,250 --> 00:00:22,305
+Poi abbiamo ascoltato 8 agenzie.
+
+10
+00:00:22,305 --> 00:00:24,103
+Per la metà, il problema n.1
+
+11
+00:00:24,103 --> 00:00:26,415
+sono le obiezioni sulle commissioni.
+
+12
+00:00:26,765 --> 00:00:29,225
+E tutte e 8 si affidano al passaparola.
+
+13
+00:00:32,250 --> 00:00:34,320
+Per questo stiamo costruendo Predy:
+
+14
+00:00:34,320 --> 00:00:35,681
+un percorso in 4 tappe.
+
+15
+00:00:35,681 --> 00:00:37,397
+Stima. Situazione. Documenti.
+
+16
+00:00:37,397 --> 00:00:38,935
+E i passi verso il rogito.
+
+17
+00:00:40,700 --> 00:00:42,473
+Predy prepara il proprietario.
+
+18
+00:00:42,473 --> 00:00:45,132
+Così l'agenzia incontra un cliente informato.
+
+19
+00:00:46,250 --> 00:00:48,849
+Siamo onesti: il problema l'abbiamo validato.
+
+20
+00:00:48,849 --> 00:00:50,351
+Ora testiamo la soluzione,
+
+21
+00:00:50,351 --> 00:00:52,603
+in beta con le prime agenzie di Torino.
+
+22
+00:00:55,350 --> 00:00:56,861
+Sei un'agenzia di Torino?
+
+23
+00:00:56,861 --> 00:00:59,218
+Scrivimi per entrare nel beta gratuito.
