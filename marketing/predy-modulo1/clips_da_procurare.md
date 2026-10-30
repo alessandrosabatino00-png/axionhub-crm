@@ -10,6 +10,12 @@ Regole per tutte le clip:
 - **STOCK**: solo da Pexels, Pixabay o Coverr; registra link, autore e licenza in `LICENZE_CLIP.md`;
 - **AI**: genera con il prompt indicato, con uno strumento i cui termini consentano l'uso commerciale del risultato, e annota strumento e termini in `LICENZE_CLIP.md`.
 
+## Stato al 2026-10-30
+
+Inserite da Pixabay: `s1_appartamento_ora_dorata.mp4`, `s3_strada_negozi_tram.mp4`, `s3_finestra_luce_salotto.mp4` (dettagli in `LICENZE_CLIP.md`).
+Ancora da procurare (segnaposto nel video): `s3_cucina_prima_dopo.mp4`, `s7_professionista_sopralluogo.mp4`, `s9_cartello_in_vendita_timelapse.mp4`; su Pixabay non c'era nulla che rispettasse le regole qui sotto.
+La scena 9 è passata da AI a STOCK: il prompt AI resta in fondo come riferimento, se si decide di tornare alla generazione.
+
 La durata minima è quella effettivamente mostrata nel montaggio (da `tempi.json`) più circa un secondo di margine.
 Se la clip è più corta, viene ripetuta in loop.
 
@@ -20,9 +26,9 @@ Se la clip è più corta, viene ripetuta in loop.
 | 3 | STOCK | `s3_finestra_luce_salotto.mp4` | Luce naturale che entra da una finestra in un salotto luminoso, camera fissa o movimento lento; nessuna persona. | 5 s |
 | 3 | STOCK | `s3_cucina_prima_dopo.mp4` | Cucina da ristrutturare che si dissolve nella stessa cucina rinnovata (stessa inquadratura). Se non esiste già montata, servono due clip della stessa cucina da unire con una dissolvenza; nessuna persona. | 4 s |
 | 7 | STOCK | `s7_professionista_sopralluogo.mp4` | Persona di spalle o inquadrata dalle mani in giù che prende misure in un salotto con un metro laser o a nastro; volto non visibile, nessun logo su abiti o strumenti. | 4 s |
-| 9 | AI | `s9_cartello_in_vendita_timelapse.mp4` | Time-lapse di un cartello "in vendita" su una facciata, la luce cambia dall'autunno all'inverno. | 6 s |
+| 9 | STOCK (era AI) | `s9_cartello_in_vendita_timelapse.mp4` | Time-lapse di un cartello "in vendita"/"affitto" su una facciata, la luce cambia; senza scritte leggibili. In mancanza: facciata residenziale italiana con luce che cambia. | 6 s |
 
-## Prompt per le clip AI
+## Prompt AI (scena 9, non più usato: la scena è passata a STOCK)
 
 **`s9_cartello_in_vendita_timelapse.mp4`** (da `scene.json`):
 

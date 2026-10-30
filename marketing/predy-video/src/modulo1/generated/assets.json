@@ -1,5 +1,9 @@
 {
- "clips": [],
+ "clips": [
+  "s1_appartamento_ora_dorata.mp4",
+  "s3_finestra_luce_salotto.mp4",
+  "s3_strada_negozi_tram.mp4"
+ ],
  "musica": {
   "file": null,
   "volume": 0.22,
