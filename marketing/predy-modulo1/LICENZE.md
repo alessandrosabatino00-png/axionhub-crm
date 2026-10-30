@@ -23,7 +23,21 @@ Verificate sul repository ufficiale di ciascun progetto. "Da verificare" = non �
 | FFmpeg (build di sistema) | LGPL/GPL | Sì |
 | Python | PSF | Sì |
 
-## Da decidere nelle fasi successive
+## Font
 
-- **Font**: Satoshi (brand) è distribuito da Fontshare con ITF Free Font License, che consente l'uso commerciale, ma Fontshare non è raggiungibile da questa sessione: per scaricarlo serve il tuo file. Alternativa simile già disponibile: Plus Jakarta Sans (SIL OFL 1.1). Inter: SIL OFL 1.1.
-- **Remotion**: non è open source in senso stretto. È gratuito per singoli e aziende fino a 3 persone; oltre serve una licenza aziendale a pagamento. Lo verifico e te lo segnalo prima della fase 3.
+| Font | Uso | Licenza | Fonte | Uso commerciale |
+|---|---|---|---|---|
+| Plus Jakarta Sans | titoli, numeri (al posto di Satoshi) | SIL OFL 1.1 | github.com/google/fonts, ofl/plusjakartasans (file in `brand/fonts/`) | Sì |
+| Inter | testo | SIL OFL 1.1 | github.com/rsms/inter, release 4.1 (file in `brand/fonts/`) | Sì |
+
+## Video
+
+| Componente | Licenza | Fonte | Uso commerciale |
+|---|---|---|---|
+| Remotion 4.x | Remotion License: gratuita per singoli, aziende con al massimo 3 dipendenti e organizzazioni non profit; oltre serve la Company License | github.com/remotion-dev/remotion (LICENSE.md) | Sì, nel piano gratuito (confermato dal committente) |
+
+## Strumenti usati una volta
+
+| Componente | Uso | Licenza |
+|---|---|---|
+| potracer | tracciatura del logo in SVG | GPL-2.0+ (solo strumento; il file SVG prodotto non è soggetto alla GPL) |
