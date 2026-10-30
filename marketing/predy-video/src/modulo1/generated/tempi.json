@@ -1,0 +1,491 @@
+{
+ "voce": "Chatterbox Multilingual V3, voce integrata, cfg_weight=0, exaggeration=0.5",
+ "lufs": -16,
+ "pausa_tra_frasi": 0.4,
+ "durata_totale": 163.784,
+ "scene": [
+  {
+   "id": 1,
+   "file": "voce/voce_s01.wav",
+   "durata_voce": 4.837,
+   "attacco": 0.6,
+   "coda": 1,
+   "durata_scena": 6.437,
+   "frasi": [
+    {
+     "testo_originale": "Hai deciso di vendere casa.",
+     "testo_inviato": "Hai deciso di vendere casa.",
+     "inizio": 0,
+     "fine": 1.384,
+     "tentativi": 1,
+     "errore_trascrizione": 0,
+     "differenze": [],
+     "trascrizione": "hai deciso di vendere casa."
+    },
+    {
+     "testo_originale": "Prima domanda, quella che condiziona tutto il resto: quanto vale?",
+     "testo_inviato": "Prima domanda, quella che condiziona tutto il resto: quanto vale?",
+     "inizio": 1.784,
+     "fine": 4.837,
+     "tentativi": 1,
+     "errore_trascrizione": 0,
+     "differenze": [],
+     "trascrizione": "Prima domanda, quella che condiziona tutto il resto, quanto vale?"
+    }
+   ],
+   "inizio_scena": 0
+  },
+  {
+   "id": 2,
+   "file": "voce/voce_s02.wav",
+   "durata_voce": 17.906,
+   "attacco": 0.6,
+   "coda": 1,
+   "durata_scena": 19.506,
+   "frasi": [
+    {
+     "testo_originale": "Prima di tutto, una distinzione che confonde molti.",
+     "testo_inviato": "Prima di tutto, una distinzione che confonde molti.",
+     "inizio": 0,
+     "fine": 2.606,
+     "tentativi": 1,
+     "errore_trascrizione": 0,
+     "differenze": [],
+     "trascrizione": "Prima di tutto, una distinzione che confonde molti."
+    },
+    {
+     "testo_originale": "Il valore è quanto la casa vale per il mercato in questo momento.",
+     "testo_inviato": "Il valore è quanto la casa vale per il mercato in questo momento.",
+     "inizio": 3.006,
+     "fine": 6.079,
+     "tentativi": 3,
+     "errore_trascrizione": 0,
+     "differenze": [],
+     "trascrizione": "Il valore è quanto la casa vale per il mercato in questo momento."
+    },
+    {
+     "testo_originale": "Il prezzo di annuncio è quello che decidi di chiedere.",
+     "testo_inviato": "Il prezzo di annuncio è quello che decidi di chiedere.",
+     "inizio": 6.479,
+     "fine": 8.718,
+     "tentativi": 1,
+     "errore_trascrizione": 0,
+     "differenze": [],
+     "trascrizione": "Il prezzo di annuncio è quello che decidi di chiedere."
+    },
+    {
+     "testo_originale": "Il prezzo di vendita è quello che finisce scritto nel rogito, ed è l'unico che conta davvero.",
+     "testo_inviato": "Il prezzo di vendita è quello che finisce scritto nel rògito, ed è l'unico che conta davvero.",
+     "inizio": 9.118,
+     "fine": 13.278,
+     "tentativi": 1,
+     "errore_trascrizione": 0,
+     "differenze": [],
+     "trascrizione": "Il prezzo di vendita è quello che finisce scritto nel rogito ed è l'unico che conta davvero."
+    },
+    {
+     "testo_originale": "Spesso non coincidono: tra annuncio e vendita c'è di mezzo la trattativa.",
+     "testo_inviato": "Spesso non coincidono: tra annuncio e vendita c'è di mezzo la trattativa.",
+     "inizio": 13.678,
+     "fine": 17.906,
+     "tentativi": 3,
+     "errore_trascrizione": 0,
+     "differenze": [],
+     "trascrizione": "Spesso non coincidono, tra annuncio e vendita c'è di mezzo la trattativa."
+    }
+   ],
+   "inizio_scena": 6.437
+  },
+  {
+   "id": 3,
+   "file": "voce/voce_s03.wav",
+   "durata_voce": 21.154,
+   "attacco": 0.6,
+   "coda": 1,
+   "durata_scena": 22.754,
+   "frasi": [
+    {
+     "testo_originale": "Il valore dipende da elementi concreti.",
+     "testo_inviato": "Il valore dipende da elementi concreti.",
+     "inizio": 0,
+     "fine": 2.083,
+     "tentativi": 1,
+     "errore_trascrizione": 0,
+     "differenze": [],
+     "trascrizione": "Il valore dipende da elementi concreti."
+    },
+    {
+     "testo_originale": "La zona e i servizi vicini: scuole, trasporti, negozi.",
+     "testo_inviato": "La zona e i servizi vicini: scuole, trasporti, negozi.",
+     "inizio": 2.483,
+     "fine": 6.114,
+     "tentativi": 3,
+     "errore_trascrizione": 0,
+     "differenze": [],
+     "trascrizione": "la zona e i servizi vicini, scuole, trasporti, negozi."
+    },
+    {
+     "testo_originale": "Il piano, l'esposizione e la luce, e la presenza dell'ascensore.",
+     "testo_inviato": "Il piano, l'esposizione e la luce, e la presenza dell'ascensore.",
+     "inizio": 6.514,
+     "fine": 10.302,
+     "tentativi": 1,
+     "errore_trascrizione": 0,
+     "differenze": [],
+     "trascrizione": "il piano, l'esposizione e la luce e la presenza dell'ascensore."
+    },
+    {
+     "testo_originale": "Lo stato dell'immobile e degli impianti.",
+     "testo_inviato": "Lo stato dell'immobile e degli impianti.",
+     "inizio": 10.702,
+     "fine": 12.875,
+     "tentativi": 1,
+     "errore_trascrizione": 0,
+     "differenze": [],
+     "trascrizione": "lo stato dell'immobile e degli impianti."
+    },
+    {
+     "testo_originale": "La classe energetica.",
+     "testo_inviato": "La classe energetica.",
+     "inizio": 13.275,
+     "fine": 14.506,
+     "tentativi": 1,
+     "errore_trascrizione": 0,
+     "differenze": [],
+     "trascrizione": "la classe energetica."
+    },
+    {
+     "testo_originale": "Gli spazi accessori, come balcone, cantina e box.",
+     "testo_inviato": "Gli spazi accessori, come balcone, cantina e box.",
+     "inizio": 14.906,
+     "fine": 18.029,
+     "tentativi": 3,
+     "errore_trascrizione": 0,
+     "differenze": [],
+     "trascrizione": "gli spazi accessori come balcone, cantina e box."
+    },
+    {
+     "testo_originale": "E le spese di condominio, che chi compra guarda sempre.",
+     "testo_inviato": "E le spese di condominio, che chi compra guarda sempre.",
+     "inizio": 18.429,
+     "fine": 21.154,
+     "tentativi": 1,
+     "errore_trascrizione": 0,
+     "differenze": [],
+     "trascrizione": "e le spese di condominio che chi compra guarda sempre."
+    }
+   ],
+   "inizio_scena": 25.943
+  },
+  {
+   "id": 4,
+   "file": "voce/voce_s04.wav",
+   "durata_voce": 16.145,
+   "attacco": 0.6,
+   "coda": 1,
+   "durata_scena": 17.745,
+   "frasi": [
+    {
+     "testo_originale": "Un errore frequente è partire dai metri quadrati sbagliati.",
+     "testo_inviato": "Un errore frequente è partire dai metri quadrati sbagliati.",
+     "inizio": 0,
+     "fine": 3.251,
+     "tentativi": 1,
+     "errore_trascrizione": 0,
+     "differenze": [],
+     "trascrizione": "Un errore frequente è partire dai metri quadrati sbagliati."
+    },
+    {
+     "testo_originale": "Per una stima conta la superficie commerciale, non quella calpestabile.",
+     "testo_inviato": "Per una stima conta la superficie commerciale, non quella calpestabile.",
+     "inizio": 3.651,
+     "fine": 7.184,
+     "tentativi": 3,
+     "errore_trascrizione": 0,
+     "differenze": [],
+     "trascrizione": "Per una stima conta la superficie commerciale, non quella calpestabile."
+    },
+    {
+     "testo_originale": "Include lo spessore dei muri, e conta in percentuale balconi, cantine e box.",
+     "testo_inviato": "Include lo spessore dei muri, e conta in percentuale balconi, cantine e box.",
+     "inizio": 7.584,
+     "fine": 11.727,
+     "tentativi": 1,
+     "errore_trascrizione": 0,
+     "differenze": [],
+     "trascrizione": "Include lo spessore dei muri e conta in percentuale balconi, cantine e box."
+    },
+    {
+     "testo_originale": "Un punto di partenza per la superficie sono la visura e la planimetria catastale.",
+     "testo_inviato": "Un punto di partenza per la superficie sono la visura e la planimetria catastale.",
+     "inizio": 12.127,
+     "fine": 16.145,
+     "tentativi": 3,
+     "errore_trascrizione": 0,
+     "differenze": [],
+     "trascrizione": "Un punto di partenza per la superficie sono la visura e la planimetria catastale."
+    }
+   ],
+   "inizio_scena": 48.697
+  },
+  {
+   "id": 5,
+   "file": "voce/voce_s05.wav",
+   "durata_voce": 18.065,
+   "attacco": 0.6,
+   "coda": 1,
+   "durata_scena": 19.665,
+   "frasi": [
+    {
+     "testo_originale": "Come si stima un valore?",
+     "testo_inviato": "Come si stima un valore?",
+     "inizio": 0,
+     "fine": 1.26,
+     "tentativi": 1,
+     "errore_trascrizione": 0,
+     "differenze": [],
+     "trascrizione": "Come si stima un valore?"
+    },
+    {
+     "testo_originale": "Per le case, il metodo più usato è il confronto: si guardano immobili simili venduti di recente nella stessa zona e si correggono le differenze, come piano, stato e dimensione.",
+     "testo_inviato": "Per le case, il metodo più usato è il confronto: si guardano immobili simili venduti di recente nella stessa zona e si correggono le differenze, come piano, stato e dimensione.",
+     "inizio": 1.66,
+     "fine": 11.445,
+     "tentativi": 2,
+     "errore_trascrizione": 0,
+     "differenze": [],
+     "trascrizione": "Per le case, il metodo più usato è il confronto, si guardano immobili simili venduti di recente  nella stessa zona e si correggono le differenze come piano, stato e dimensione."
+    },
+    {
+     "testo_originale": "Altri metodi, come il costo di ricostruzione o il reddito che l'immobile può dare in affitto, servono in casi particolari.",
+     "testo_inviato": "Altri metodi, come il costo di ricostruzione o il reddito che l'immobile può dare in affitto, servono in casi particolari.",
+     "inizio": 11.845,
+     "fine": 18.065,
+     "tentativi": 1,
+     "errore_trascrizione": 0,
+     "differenze": [],
+     "trascrizione": "Altri metodi, come il costo di ricostruzione o il reddito che l'immobile può dare in affitto, servono in casi particolari."
+    }
+   ],
+   "inizio_scena": 66.442
+  },
+  {
+   "id": 6,
+   "file": "voce/voce_s06.wav",
+   "durata_voce": 11.507,
+   "attacco": 0.6,
+   "coda": 1,
+   "durata_scena": 13.107,
+   "frasi": [
+    {
+     "testo_originale": "Un punto di partenza serio sono le quotazioni dell'OMI, l'Osservatorio del Mercato Immobiliare dell'Agenzia delle Entrate.",
+     "testo_inviato": "Un punto di partenza serio sono le quotazioni dell'O emme i, l'Osservatorio del Mercato Immobiliare dell'Agenzia delle Entrate.",
+     "inizio": 0,
+     "fine": 6.24,
+     "tentativi": 2,
+     "errore_trascrizione": 0,
+     "differenze": [],
+     "trascrizione": "Un punto di partenza serio sono le quotazioni dell'OMI, l'osservatorio del mercato immobiliare  dell'agenzia delle entrate."
+    },
+    {
+     "testo_originale": "Non danno il valore della tua casa, ma una fascia di riferimento per zona e stato di conservazione.",
+     "testo_inviato": "Non danno il valore della tua casa, ma una fascia di riferimento per zona e stato di conservazione.",
+     "inizio": 6.64,
+     "fine": 11.507,
+     "tentativi": 1,
+     "errore_trascrizione": 0,
+     "differenze": [],
+     "trascrizione": "non danno il valore della tua casa, ma una fascia di riferimento per zona e stato di  conservazione."
+    }
+   ],
+   "inizio_scena": 86.107
+  },
+  {
+   "id": 7,
+   "file": "voce/voce_s07.wav",
+   "durata_voce": 21.584,
+   "attacco": 0.6,
+   "coda": 1,
+   "durata_scena": 23.184,
+   "frasi": [
+    {
+     "testo_originale": "Puoi farti aiutare in tre modi.",
+     "testo_inviato": "Puoi farti aiutare in tre modi.",
+     "inizio": 0,
+     "fine": 1.712,
+     "tentativi": 1,
+     "errore_trascrizione": 0,
+     "differenze": [],
+     "trascrizione": "puoi farti aiutare in tre modi"
+    },
+    {
+     "testo_originale": "Una valutazione di un'agenzia, che si basa sulla sua conoscenza del mercato locale.",
+     "testo_inviato": "Una valutazione di un'agenzia, che si basa sulla sua conoscenza del mercato locale.",
+     "inizio": 2.112,
+     "fine": 6.547,
+     "tentativi": 1,
+     "errore_trascrizione": 0,
+     "differenze": [],
+     "trascrizione": "una valutazione di un'agenzia che si basa sulla sua conoscenza del mercato locale."
+    },
+    {
+     "testo_originale": "Una perizia di un tecnico abilitato, a pagamento, che produce un documento firmato.",
+     "testo_inviato": "Una perizia di un tecnico abilitato, a pagamento, che produce un documento firmato.",
+     "inizio": 6.947,
+     "fine": 11.265,
+     "tentativi": 1,
+     "errore_trascrizione": 0,
+     "differenze": [],
+     "trascrizione": "una perizia di un tecnico abilitato a pagamento che produce un documento firmato."
+    },
+    {
+     "testo_originale": "E gli strumenti online, che danno un'indicazione ma non vedono la tua casa.",
+     "testo_inviato": "E gli strumenti online, che danno un'indicazione ma non vedono la tua casa.",
+     "inizio": 11.665,
+     "fine": 15.615,
+     "tentativi": 1,
+     "errore_trascrizione": 0,
+     "differenze": [],
+     "trascrizione": "e gli strumenti online che danno un'indicazione ma non vedono la tua casa."
+    },
+    {
+     "testo_originale": "In ogni caso, chiedi su quali immobili si basa la cifra.",
+     "testo_inviato": "In ogni caso, chiedi su quali immobili si basa la cifra.",
+     "inizio": 16.015,
+     "fine": 19.045,
+     "tentativi": 1,
+     "errore_trascrizione": 0,
+     "differenze": [],
+     "trascrizione": "In ogni caso, chiedi su quali immobili si basa la cifra."
+    },
+    {
+     "testo_originale": "Una stima senza confronti non è una stima.",
+     "testo_inviato": "Una stima senza confronti non è una stima.",
+     "inizio": 19.445,
+     "fine": 21.584,
+     "tentativi": 2,
+     "errore_trascrizione": 0,
+     "differenze": [],
+     "trascrizione": "Una stima senza confronti non è una stima."
+    }
+   ],
+   "inizio_scena": 99.214
+  },
+  {
+   "id": 8,
+   "file": "voce/voce_s08.wav",
+   "durata_voce": 10.832,
+   "attacco": 0.6,
+   "coda": 1,
+   "durata_scena": 12.432,
+   "frasi": [
+    {
+     "testo_originale": "Fai almeno due o tre confronti.",
+     "testo_inviato": "Fai almeno due o tre confronti.",
+     "inizio": 0,
+     "fine": 2.143,
+     "tentativi": 1,
+     "errore_trascrizione": 0,
+     "differenze": [],
+     "trascrizione": "fai almeno due o tre confronti."
+    },
+    {
+     "testo_originale": "Se le cifre sono vicine, hai un'area di prezzo affidabile.",
+     "testo_inviato": "Se le cifre sono vicine, hai un'area di prezzo affidabile.",
+     "inizio": 2.543,
+     "fine": 5.572,
+     "tentativi": 4,
+     "errore_trascrizione": 0,
+     "differenze": [],
+     "trascrizione": "Se le cifre sono vicine, hai un'area di prezzo affidabile."
+    },
+    {
+     "testo_originale": "Se sono molto distanti, chiedi perché: la differenza sta spesso in un dettaglio che conviene capire.",
+     "testo_inviato": "Se sono molto distanti, chiedi perché: la differenza sta spesso in un dettaglio che conviene capire.",
+     "inizio": 5.972,
+     "fine": 10.832,
+     "tentativi": 1,
+     "errore_trascrizione": 0,
+     "differenze": [],
+     "trascrizione": "Se sono molto distanti, chiedi perché la differenza sta spesso in un dettaglio che  conviene capire."
+    }
+   ],
+   "inizio_scena": 122.398
+  },
+  {
+   "id": 9,
+   "file": "voce/voce_s09.wav",
+   "durata_voce": 13.355,
+   "attacco": 0.6,
+   "coda": 1,
+   "durata_scena": 14.955,
+   "frasi": [
+    {
+     "testo_originale": "Un prezzo troppo alto allunga i tempi, e con il tempo l'annuncio perde attenzione.",
+     "testo_inviato": "Un prezzo troppo alto allunga i tempi, e con il tempo l'annuncio perde attenzione.",
+     "inizio": 0,
+     "fine": 4.765,
+     "tentativi": 1,
+     "errore_trascrizione": 0,
+     "differenze": [],
+     "trascrizione": "Un prezzo troppo alto allunga i tempi e con il tempo l'annuncio perde attenzione."
+    },
+    {
+     "testo_originale": "Un prezzo troppo basso fa perdere denaro che non si recupera.",
+     "testo_inviato": "Un prezzo troppo basso fa perdere denaro che non si recupera.",
+     "inizio": 5.165,
+     "fine": 8.125,
+     "tentativi": 1,
+     "errore_trascrizione": 0,
+     "differenze": [],
+     "trascrizione": "Un prezzo troppo basso fa perdere denaro che non si recupera."
+    },
+    {
+     "testo_originale": "E tieni conto del margine di trattativa: chi compra, quasi sempre, prova a trattare.",
+     "testo_inviato": "E tieni conto del margine di trattativa: chi compra, quasi sempre, prova a trattare.",
+     "inizio": 8.525,
+     "fine": 13.355,
+     "tentativi": 1,
+     "errore_trascrizione": 0,
+     "differenze": [],
+     "trascrizione": "e tieni conto del margine di trattativa,  chi compra quasi sempre prova a trattare."
+    }
+   ],
+   "inizio_scena": 134.83
+  },
+  {
+   "id": 10,
+   "file": "voce/voce_s10.wav",
+   "durata_voce": 12.399,
+   "attacco": 0.6,
+   "coda": 1,
+   "durata_scena": 13.999,
+   "frasi": [
+    {
+     "testo_originale": "Prima di parlare con qualcuno, raccogli i dati: visura e planimetria catastale, anno di costruzione, classe energetica, spese di condominio.",
+     "testo_inviato": "Prima di parlare con qualcuno, raccogli i dati: visura e planimetria catastale, anno di costruzione, classe energetica, spese di condominio.",
+     "inizio": 0,
+     "fine": 7.81,
+     "tentativi": 3,
+     "errore_trascrizione": 0.1,
+     "differenze": [
+      "«i» → «»",
+      "«anno» → «hanno»"
+     ],
+     "trascrizione": "Prima di parlare con qualcuno, raccogli dati, visura e planimetria catastale hanno di costruzione  classe energetica spese di condominio."
+    },
+    {
+     "testo_originale": "Poi ottieni una fascia di valore, e confrontala con almeno due professionisti.",
+     "testo_inviato": "Poi ottieni una fascia di valore, e confrontala con almeno due professionisti.",
+     "inizio": 8.21,
+     "fine": 12.399,
+     "tentativi": 1,
+     "errore_trascrizione": 0,
+     "differenze": [],
+     "trascrizione": "poi ottieni una fascia di valore e confrontala con almeno due professionisti."
+    }
+   ],
+   "inizio_scena": 149.785
+  }
+ ]
+}

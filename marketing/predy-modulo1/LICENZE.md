@@ -45,7 +45,10 @@ Verificate sul repository ufficiale di ciascun progetto. "Da verificare" = non �
 
 | Componente | Licenza | Fonte | Uso commerciale |
 |---|---|---|---|
-| Remotion 4.x | Remotion License: gratuita per singoli, aziende con al massimo 3 dipendenti e organizzazioni non profit; oltre serve la Company License | github.com/remotion-dev/remotion (LICENSE.md) | Sì, nel piano gratuito (confermato dal committente) |
+| Remotion 4.0.539 (`remotion`, `@remotion/cli`, `@remotion/media`, `@remotion/fonts`) | Remotion License: gratuita per singoli, aziende con al massimo 3 dipendenti e organizzazioni non profit; oltre serve la Company License | github.com/remotion-dev/remotion (LICENSE.md) | Sì, nel piano gratuito (confermato dal committente) |
+
+| React, React DOM | MIT | github.com/facebook/react | Sì |
+| Chromium headless shell (usato da Remotion per il render, già presente nell'ambiente) | BSD-3-Clause | chromium.org | Sì |
 
 ## Logo
 

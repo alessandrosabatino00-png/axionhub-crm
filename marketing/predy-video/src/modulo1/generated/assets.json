@@ -1,0 +1,10 @@
+{
+ "clips": [],
+ "musica": {
+  "file": null,
+  "volume": 0.22,
+  "volume_sotto_voce": 0.06,
+  "rampa_s": 0.35,
+  "nota": "Metti la traccia in questa cartella e scrivi qui il nome del file (es. \"traccia.mp3\"). Con file = null la musica è disattivata. Il volume scende a volume_sotto_voce mentre parla la voce (ducking)."
+ }
+}

@@ -1,0 +1,95 @@
+[
+ {
+  "id": 1,
+  "tipo": "STOCK+ANIM",
+  "clip": "s1_appartamento_ora_dorata.mp4",
+  "testo_per_voce": "Hai deciso di vendere casa. Prima domanda, quella che condiziona tutto il resto: quanto vale?",
+  "testo_originale": "Hai deciso di vendere casa. Prima domanda, quella che condiziona tutto il resto: quanto vale?",
+  "testo_schermo": "Quanto vale la tua casa?",
+  "visuale": "Carrellata lenta su un appartamento da fuori all'ora dorata; un punto interrogativo si forma dal prezzo (ANIM)."
+ },
+ {
+  "id": 2,
+  "tipo": "ANIM",
+  "testo_per_voce": "Prima di tutto, una distinzione che confonde molti. Il valore è quanto la casa vale per il mercato in questo momento. Il prezzo di annuncio è quello che decidi di chiedere. Il prezzo di vendita è quello che finisce scritto nel rogito, ed è l'unico che conta davvero. Spesso non coincidono: tra annuncio e vendita c'è di mezzo la trattativa.",
+  "testo_originale": "Prima di tutto, una distinzione che confonde molti. Il valore è quanto la casa vale per il mercato in questo momento. Il prezzo di annuncio è quello che decidi di chiedere. Il prezzo di vendita è quello che finisce scritto nel rogito, ed è l'unico che conta davvero. Spesso non coincidono: tra annuncio e vendita c'è di mezzo la trattativa.",
+  "testo_schermo": "Valore | Prezzo di annuncio | Prezzo di vendita",
+  "visuale": "Tre colonne di altezza diversa che compaiono una alla volta, con etichetta e una riga di definizione; la terza leggermente più bassa della seconda. Nessun valore numerico."
+ },
+ {
+  "id": 3,
+  "tipo": "STOCK+ANIM",
+  "clips": [
+   "s3_strada_negozi_tram.mp4",
+   "s3_finestra_luce_salotto.mp4",
+   "s3_cucina_prima_dopo.mp4"
+  ],
+  "testo_per_voce": "Il valore dipende da elementi concreti. La zona e i servizi vicini: scuole, trasporti, negozi. Il piano, l'esposizione e la luce, e la presenza dell'ascensore. Lo stato dell'immobile e degli impianti. La classe energetica. Gli spazi accessori, come balcone, cantina e box. E le spese di condominio, che chi compra guarda sempre.",
+  "testo_originale": "Il valore dipende da elementi concreti. La zona e i servizi vicini: scuole, trasporti, negozi. Il piano, l'esposizione e la luce, e la presenza dell'ascensore. Lo stato dell'immobile e degli impianti. La classe energetica. Gli spazi accessori, come balcone, cantina e box. E le spese di condominio, che chi compra guarda sempre.",
+  "testo_schermo": "Zona e servizi | Piano e luce | Stato e impianti | Classe energetica | Accessori | Spese di condominio",
+  "visuale": "Strada con negozi e tram; finestra con luce su un salotto; cucina da ristrutturare che si dissolve in una rinnovata; etichetta energetica A-G (ANIM); balcone/cantina/box in icone (ANIM); regolamento condominiale (ANIM). Un'icona si accende per ogni voce."
+ },
+ {
+  "id": 4,
+  "tipo": "ANIM",
+  "nota": "DA VERIFICARE",
+  "testo_per_voce": "Un errore frequente è partire dai metri quadrati sbagliati. Per una stima conta la superficie commerciale, non quella calpestabile. Include lo spessore dei muri, e conta in percentuale balconi, cantine e box. Un punto di partenza per la superficie sono la visura e la planimetria catastale.",
+  "testo_originale": "Un errore frequente è partire dai metri quadrati sbagliati. Per una stima conta la superficie commerciale, non quella calpestabile. Include lo spessore dei muri, e conta in percentuale balconi, cantine e box. Un punto di partenza per la superficie sono la visura e la planimetria catastale.",
+  "testo_schermo": "Superficie commerciale ≠ superficie calpestabile",
+  "visuale": "Planimetria stilizzata che si anima: prima il perimetro interno, poi si aggiungono muri, balcone e cantina con riempimenti diversi. Nessuna cifra."
+ },
+ {
+  "id": 5,
+  "tipo": "ANIM",
+  "nota": "DA VERIFICARE",
+  "testo_per_voce": "Come si stima un valore? Per le case, il metodo più usato è il confronto: si guardano immobili simili venduti di recente nella stessa zona e si correggono le differenze, come piano, stato e dimensione. Altri metodi, come il costo di ricostruzione o il reddito che l'immobile può dare in affitto, servono in casi particolari.",
+  "testo_originale": "Come si stima un valore? Per le case, il metodo più usato è il confronto: si guardano immobili simili venduti di recente nella stessa zona e si correggono le differenze, come piano, stato e dimensione. Altri metodi, come il costo di ricostruzione o il reddito che l'immobile può dare in affitto, servono in casi particolari.",
+  "testo_schermo": "Stima per confronto: immobili simili, venduti di recente, stessa zona",
+  "visuale": "La tua casa al centro; tre case simili intorno con piccole etichette di differenza ('piano più alto', 'da ristrutturare'); frecce di aggiustamento. Poi due icone più piccole per gli altri metodi."
+ },
+ {
+  "id": 6,
+  "tipo": "ANIM",
+  "nota": "DA VERIFICARE",
+  "testo_per_voce": "Un punto di partenza serio sono le quotazioni dell'O-emme-i, l'Osservatorio del Mercato Immobiliare dell'Agenzia delle Entrate. Non danno il valore della tua casa, ma una fascia di riferimento per zona e stato di conservazione.",
+  "testo_originale": "Un punto di partenza serio sono le quotazioni dell'OMI, l'Osservatorio del Mercato Immobiliare dell'Agenzia delle Entrate. Non danno il valore della tua casa, ma una fascia di riferimento per zona e stato di conservazione.",
+  "testo_schermo": "Fonte: OMI, Agenzia delle Entrate. Fascia indicativa, non una perizia.",
+  "visuale": "Mappa stilizzata di quartiere con zone colorate; scala di prezzo con un RANGE evidenziato, non un numero."
+ },
+ {
+  "id": 7,
+  "tipo": "STOCK+ANIM",
+  "nota": "DA VERIFICARE",
+  "clip": "s7_professionista_sopralluogo.mp4",
+  "testo_per_voce": "Puoi farti aiutare in tre modi. Una valutazione di un'agenzia, che si basa sulla sua conoscenza del mercato locale. Una perizia di un tecnico abilitato, a pagamento, che produce un documento firmato. E gli strumenti online, che danno un'indicazione ma non vedono la tua casa. In ogni caso, chiedi su quali immobili si basa la cifra. Una stima senza confronti non è una stima.",
+  "testo_originale": "Puoi farti aiutare in tre modi. Una valutazione di un'agenzia, che si basa sulla sua conoscenza del mercato locale. Una perizia di un tecnico abilitato, a pagamento, che produce un documento firmato. E gli strumenti online, che danno un'indicazione ma non vedono la tua casa. In ogni caso, chiedi su quali immobili si basa la cifra. Una stima senza confronti non è una stima.",
+  "testo_schermo": "Valutazione di un'agenzia | Perizia di un tecnico | Strumenti online — Chiedi sempre: su quali immobili si basa?",
+  "visuale": "Persona di spalle che prende misure in un salotto (STOCK); tre card ANIM che compaiono, poi la domanda in evidenza."
+ },
+ {
+  "id": 8,
+  "tipo": "ANIM",
+  "testo_per_voce": "Fai almeno due o tre confronti. Se le cifre sono vicine, hai un'area di prezzo affidabile. Se sono molto distanti, chiedi perché: la differenza sta spesso in un dettaglio che conviene capire.",
+  "testo_originale": "Fai almeno due o tre confronti. Se le cifre sono vicine, hai un'area di prezzo affidabile. Se sono molto distanti, chiedi perché: la differenza sta spesso in un dettaglio che conviene capire.",
+  "testo_schermo": "2-3 confronti. Cifre vicine = area affidabile. Cifre lontane = chiedi perché.",
+  "visuale": "Tre segnaposto su una scala di prezzo: prima ravvicinati (zona evidenziata), poi distanti (punto interrogativo)."
+ },
+ {
+  "id": 9,
+  "tipo": "AI+ANIM",
+  "clip": "s9_cartello_in_vendita_timelapse.mp4",
+  "testo_per_voce": "Un prezzo troppo alto allunga i tempi, e con il tempo l'annuncio perde attenzione. Un prezzo troppo basso fa perdere denaro che non si recupera. E tieni conto del margine di trattativa: chi compra, quasi sempre, prova a trattare.",
+  "testo_originale": "Un prezzo troppo alto allunga i tempi, e con il tempo l'annuncio perde attenzione. Un prezzo troppo basso fa perdere denaro che non si recupera. E tieni conto del margine di trattativa: chi compra, quasi sempre, prova a trattare.",
+  "testo_schermo": "Troppo alto: tempi lunghi. Troppo basso: perdi valore. Lascia margine di trattativa.",
+  "prompt_clip_ai": "Time-lapse di un cartello 'in vendita' su una facciata di palazzo in una via italiana, nessuna scritta leggibile, nessuna persona, luce naturale che passa dall'autunno all'inverno, inquadratura fissa, toni caldi e naturali, 6 secondi.",
+  "visuale": "Poi bilancia ANIM che pende dai due lati e una barra 'margine di trattativa'."
+ },
+ {
+  "id": 10,
+  "tipo": "ANIM",
+  "testo_per_voce": "Prima di parlare con qualcuno, raccogli i dati: visura e planimetria catastale, anno di costruzione, classe energetica, spese di condominio. Poi ottieni una fascia di valore, e confrontala con almeno due professionisti.",
+  "testo_originale": "Prima di parlare con qualcuno, raccogli i dati: visura e planimetria catastale, anno di costruzione, classe energetica, spese di condominio. Poi ottieni una fascia di valore, e confrontala con almeno due professionisti.",
+  "testo_schermo": "Checklist: visura e planimetria | anno | classe energetica | spese. Poi: calcola la tua fascia di valore — predy.it",
+  "visuale": "Checklist con quattro voci che si spuntano; poi schermata schematica del tool con un range, etichettata 'esempio'; chiusura sul logo Predy. Spazio sotto per il pulsante della pagina ospitante."
+ }
+]
