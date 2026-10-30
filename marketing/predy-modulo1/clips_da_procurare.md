@@ -13,8 +13,8 @@ Regole per tutte le clip:
 ## Stato al 2026-10-30
 
 Inserite da Pixabay: `s1_appartamento_ora_dorata.mp4`, `s3_strada_negozi_tram.mp4`, `s3_finestra_luce_salotto.mp4` (dettagli in `LICENZE_CLIP.md`).
-Ancora da procurare (segnaposto nel video): `s3_cucina_prima_dopo.mp4`, `s7_professionista_sopralluogo.mp4`, `s9_cartello_in_vendita_timelapse.mp4`; su Pixabay non c'era nulla che rispettasse le regole qui sotto.
-La scena 9 è passata da AI a STOCK: il prompt AI resta in fondo come riferimento, se si decide di tornare alla generazione.
+Sostituite da animazioni disegnate (nessuna clip adatta su Pixabay): `s3_cucina_prima_dopo.mp4`, `s7_professionista_sopralluogo.mp4`, `s9_cartello_in_vendita_timelapse.mp4`. Sono facoltative: se in futuro metti in `clips/` un file con lo stesso nome, il video usa la clip al posto dell'animazione.
+Il prompt AI della scena 9 resta in fondo come riferimento.
 
 La durata minima è quella effettivamente mostrata nel montaggio (da `tempi.json`) più circa un secondo di margine.
 Se la clip è più corta, viene ripetuta in loop.

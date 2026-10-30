@@ -3,7 +3,8 @@ import { AbsoluteFill } from "remotion";
 import { inizioFrase } from "../data";
 import { C, MARGINE } from "../theme";
 import { entra, mix, useT } from "../components/anim";
-import { Clip, Scena, Testo, Titolo } from "../components/Base";
+import { Scena, Testo, Titolo } from "../components/Base";
+import { ClipOAnimazione } from "../components/AnimClip";
 import { IconaAgenzia, IconaOnline, IconaPerizia } from "../components/Icone";
 
 const ID = 7;
@@ -74,7 +75,7 @@ export const S07Aiuto: React.FC<{ durata: number }> = ({ durata }) => {
       </div>
       {clip > 0 ? (
         <AbsoluteFill style={{ opacity: clip }}>
-          <Clip file="s7_professionista_sopralluogo.mp4" durata={f(1) + 0.4} style={{ inset: 0 }} />
+          <ClipOAnimazione file="s7_professionista_sopralluogo.mp4" durata={f(1) + 0.4} style={{ inset: 0 }} />
         </AbsoluteFill>
       ) : null}
     </Scena>

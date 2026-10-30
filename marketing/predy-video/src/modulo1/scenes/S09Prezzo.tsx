@@ -3,7 +3,8 @@ import { AbsoluteFill } from "remotion";
 import { inizioFrase } from "../data";
 import { C, MARGINE } from "../theme";
 import { entra, mix, useT } from "../components/anim";
-import { Clip, Scena, Testo } from "../components/Base";
+import { Scena, Testo } from "../components/Base";
+import { ClipOAnimazione } from "../components/AnimClip";
 
 const ID = 9;
 
@@ -69,7 +70,7 @@ export const S09Prezzo: React.FC<{ durata: number }> = ({ durata }) => {
 
       {clip > 0 ? (
         <AbsoluteFill style={{ opacity: clip }}>
-          <Clip file="s9_cartello_in_vendita_timelapse.mp4" durata={f(0) + 3} zoom={[1, 1.03]} style={{ inset: 0 }} />
+          <ClipOAnimazione file="s9_cartello_in_vendita_timelapse.mp4" durata={f(0) + 3} zoom={[1, 1.03]} style={{ inset: 0 }} />
         </AbsoluteFill>
       ) : null}
     </Scena>

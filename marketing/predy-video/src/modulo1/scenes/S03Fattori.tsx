@@ -4,6 +4,7 @@ import { inizioFrase } from "../data";
 import { C, FONT_TITOLI, MARGINE } from "../theme";
 import { entra, mix, useT } from "../components/anim";
 import { Clip, Scena, Testo } from "../components/Base";
+import { ClipOAnimazione } from "../components/AnimClip";
 import { IconaAccessori, IconaCondominio, IconaDocumento, IconaEnergia, IconaImpianti, IconaLuce, IconaZona } from "../components/Icone";
 
 const ID = 3;
@@ -90,7 +91,7 @@ export const S03Fattori: React.FC<{ durata: number }> = ({ durata }) => {
   const pannelli: { da: number; nodo: React.ReactNode }[] = [
     { da: 0, nodo: <Clip file="s3_strada_negozi_tram.mp4" durata={inizio(2)} style={{ inset: 0 }} /> },
     { da: inizio(2), nodo: <Clip file="s3_finestra_luce_salotto.mp4" durata={inizio(3) - inizio(2)} style={{ inset: 0 }} /> },
-    { da: inizio(3), nodo: <Clip file="s3_cucina_prima_dopo.mp4" durata={inizio(4) - inizio(3)} style={{ inset: 0 }} /> },
+    { da: inizio(3), nodo: <ClipOAnimazione file="s3_cucina_prima_dopo.mp4" da={inizio(3)} durata={inizio(4) - inizio(3)} style={{ inset: 0 }} /> },
     { da: inizio(4), nodo: <Energetica t={t} da={inizio(4)} /> },
     { da: inizio(5), nodo: <Accessori t={t} da={inizio(5)} /> },
     { da: inizio(6), nodo: <Regolamento t={t} da={inizio(6)} /> },

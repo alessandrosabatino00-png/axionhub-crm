@@ -15,7 +15,7 @@ Il testo delle scene non è stato modificato. Qui sotto: i dubbi da sottoporre a
 | Scena | Testo a schermo |
 |---|---|
 | 2 | definizioni brevi: «Quanto vale per il mercato, oggi», «Quanto decidi di chiedere», «Quello scritto nel rogito»; etichetta «trattativa» |
-| 3 | «Regolamento condominiale»; «Balcone», «Cantina», «Box»; lettere A–G dell'etichetta energetica |
+| 3 | «prima», «dopo» (animazione della cucina); «Regolamento condominiale»; «Balcone», «Cantina», «Box»; lettere A–G dell'etichetta energetica |
 | 4 | legenda: «Calpestabile», «+ muri», «+ balconi, cantine, box in percentuale», «Visura e planimetria catastale» |
 | 5 | «piano più alto», «da ristrutturare», «più piccola», «La tua casa», «Costo di ricostruzione», «Reddito da affitto», «Solo in casi particolari» |
 | 6 | «Quotazioni OMI», «per zona e stato di conservazione», «fascia» |
