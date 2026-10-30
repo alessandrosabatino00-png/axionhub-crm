@@ -22,8 +22,9 @@ Verificate sul repository ufficiale di ciascun progetto. "Da verificare" = non �
 | Qwen3-TTS (codice, `qwen-tts`) | TTS | Apache-2.0 | github.com/QwenLM/Qwen3-TTS (LICENSE) | Sì |
 | Qwen3-TTS-12Hz-1.7B-VoiceDesign (pesi) | TTS | Apache-2.0 | huggingface.co/Qwen/Qwen3-TTS-12Hz-1.7B-VoiceDesign | Sì |
 | PyTorch, Transformers | runtime | BSD-3-Clause, Apache-2.0 | repo ufficiali | Sì |
-| faster-whisper + Whisper medium | solo controllo tecnico (trascrizione) | MIT, MIT | github.com/SYSTRAN/faster-whisper, huggingface.co/Systran/faster-whisper-medium | Sì |
+| faster-whisper + Whisper medium | controllo automatico delle frasi in gen_voce.py (non usato per i sottotitoli) | MIT, MIT | github.com/SYSTRAN/faster-whisper, huggingface.co/Systran/faster-whisper-medium | Sì |
 | jiwer | calcolo WER | Apache-2.0 | pypi | Sì |
+| librosa | ricampionamento audio per il controllo (gen_voce.py) | ISC | github.com/librosa/librosa | Sì |
 | XTTS v2, F5-TTS | esclusi | non commerciali | — | No |
 
 ## Strumenti
