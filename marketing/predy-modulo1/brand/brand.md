@@ -20,9 +20,7 @@
 
 ## Logo
 
-- `logo_predy_originale.webp`: file fornito (raster, 2000x667).
-- `logo_predy.png`: stesso logo ritagliato, sfondo trasparente, colore Deep Teal.
-- `logo_predy.svg`: vettoriale ottenuto per tracciatura automatica del PNG. Fedele alle dimensioni d'uso del video, ma non è il file originale del designer: per stampa o grandi formati serve l'SVG originale.
+- `logo_predy_originale.webp`: file originale fornito (2000x667, sfondo trasparente). È l'unico logo da usare.
 - Nei video il logo è sempre un file separato, caricato come immagine e mai ridisegnato nelle animazioni, così si può sostituire se il nome cambia.
 
 ## Payoff e frasi dal mockup

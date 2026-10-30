@@ -1,50 +1,76 @@
 # Fase 1 — Confronto voci italiane
 
-Testi di prova: `testo_per_voce` delle scene 2 e 6, generati senza modifiche, velocità 1.0.
-Campioni in `audio/`, normalizzati con `ffmpeg loudnorm` (I = -16 LUFS, TP = -1.5 dBTP), 48 kHz.
-Generazione su CPU (4 core), nessuna GPU.
+Testi di prova: `testo_per_voce` delle scene 2 (60 parole) e 6 (34 parole), senza modifiche.
+Tutti i campioni in `audio/` sono normalizzati con `ffmpeg loudnorm` (I = -16 LUFS, TP = -1,5 dBTP), 48 kHz.
+Generazione su CPU (4 core, nessuna GPU): in produzione i tempi scalano con la lunghezza del testo.
+
+Le colonne tecniche non dicono nulla sulla naturalezza: quella la valuti tu ascoltando.
 
 ## Riepilogo
 
-| Modello | Voce | Licenza codice | Licenza voce/pesi | Uso commerciale | Stato |
+| File (scena 2 / 6) | Modello | Voce | Licenza codice | Licenza pesi/voce | Uso commerciale |
 |---|---|---|---|---|---|
-| Kokoro-82M (via kokoro-onnx) | `if_sara` (F) | Apache-2.0 (kokoro), MIT (kokoro-onnx) | Apache-2.0 | Sì | Generata |
-| Kokoro-82M (via kokoro-onnx) | `im_nicola` (M) | Apache-2.0 (kokoro), MIT (kokoro-onnx) | Apache-2.0 | Sì | Generata |
-| Piper | `it_IT-paola-medium`, `it_IT-riccardo-x_low` | MIT (rhasspy/piper, archiviato), GPL-3.0 (OHF-Voice/piper1-gpl, attuale) | Da verificare per ogni voce (model card su Hugging Face) | Da verificare | **Non generata**: download bloccato |
-| Chatterbox Multilingual V3 | voce di default / clonazione | MIT | MIT (dichiarata nel repo ufficiale) | Sì (da riconfermare sulla model card) | **Non generata**: download bloccato |
-| Google Cloud TTS / Azure TTS | — | proprietario | termini del servizio | Sì, nei limiti dei termini | **In attesa di credenziali** |
+| `qwen3_donna_*` | Qwen3-TTS 1.7B VoiceDesign | voce femminile progettata da descrizione testuale | Apache-2.0 | Apache-2.0 | Sì |
+| `qwen3_uomo_*` | Qwen3-TTS 1.7B VoiceDesign | voce maschile progettata da descrizione testuale | Apache-2.0 | Apache-2.0 | Sì |
+| `chatterbox_default_*` | Chatterbox Multilingual V3 | voce integrata nel modello | MIT | MIT | Sì |
+| `chatterbox_rif_donna_*` | Chatterbox Multilingual V3 | timbro clonato dal campione `qwen3_donna_s6` | MIT | MIT (+ riferimento Apache-2.0) | Sì |
+| `chatterbox_rif_uomo_*` | Chatterbox Multilingual V3 | timbro clonato dal campione `qwen3_uomo_s6` | MIT | MIT (+ riferimento Apache-2.0) | Sì |
+| `piper_serena_*` | Piper (high) | serena | GPL-3.0 (piper-tts 1.8) | modello MIT; dataset CC-BY-4.0 | Sì, con attribuzione del dataset |
+| `piper_paola_*` | Piper (medium) | paola | GPL-3.0 | dataset CC0, ma addestrata partendo dalla voce inglese *lessac* (Blizzard 2013) | Da verificare |
+| `piper_riccardo_*` | Piper (x_low) | riccardo | GPL-3.0 | dataset M-AILABS | Da verificare |
+| `kokoro_*` | Kokoro-82M | if_sara, im_nicola | Apache-2.0 / MIT | Apache-2.0 | Sì (scartata: poco naturale) |
+| — | Google Cloud TTS / Azure TTS | — | proprietario | termini del servizio | Non provati: servono credenziali |
 
-## Kokoro-82M — dettagli misurati
+## Misure tecniche
 
-| File | Durata | Tempo di generazione | Loudness / picco | Pause > 0,25 s |
-|---|---|---|---|---|
-| `kokoro_if_sara_s2.wav` | 17,4 s | 6,3 s | -16,2 LUFS / -1,5 dBFS | 1 (0,36 s) |
-| `kokoro_if_sara_s6.wav` | 12,7 s | 3,5 s | -16,3 LUFS / -1,5 dBFS | 0 |
-| `kokoro_im_nicola_s2.wav` | 20,1 s | 5,8 s | -16,5 LUFS / -1,5 dBFS | 5 (media 0,34 s) |
-| `kokoro_im_nicola_s6.wav` | 14,6 s | 4,0 s | -16,6 LUFS / -1,5 dBFS | 4 (media 0,36 s) |
+Velocità = parole al minuto, pause incluse (per un corso si sta di solito tra 140 e 170).
+Controllo testo = trascrizione automatica con Whisper *medium* confrontata con il copione (WER = quota di parole diverse).
+Whisper può sbagliare a sua volta: una differenza è un punto da ascoltare, non un errore certo.
 
-Note tecniche:
-- **Italiano supportato** (`lang="it"`), 2 voci: `if_sara`, `im_nicola`. La fonetizzazione usa espeak-ng (incluso in `espeakng-loader`, GPL-3.0: si usa come programma, l'audio prodotto non è soggetto alla GPL).
-- **Pause**: `if_sara` lega quasi tutte le frasi (una sola pausa sopra 0,25 s in 17 s): ritmo serrato per un corso. `im_nicola` fa pause regolari tra le frasi. In fase 2 si possono generare le frasi separatamente e inserire pause fisse (es. 0,4 s) per entrambe.
-- **Accenti controllati sulla trascrizione fonetica** (non ascoltando): corretti *ròGito*, *coinCÌdono*, *deCÌdi*, *CHIÈdere*, *PRÈzzo*, *di MÈzzo*, *ZÒna*, *Agenzia delle Entrate*. "O-emme-i" viene letto come una parola unica (*dell'oÈmmeÌ*).
-- **Possibili difetti da verificare all'ascolto**: "è" fonetizzata chiusa (/e/ invece di /ɛ/); le *i* e *u* finali atone sono rese con vocali "rilassate" di tipo inglese (/ɪ/, /ʊ/: *moltɪ*, *dɪ*, *ʊna*), il che può dare un leggero accento non italiano.
-- Gli errori di pronuncia di una singola parola si possono correggere in fase 2 riscrivendo `testo_per_voce` (come per "O-emme-i").
+| File | Durata | Velocità | Pause > 0,25 s (n / media / max) | Tempo di generazione | WER | Differenze rilevate |
+|---|---|---|---|---|---|---|
+| qwen3_donna_s2 | 26,2 s | 137 | 9 / 0,65 / 1,03 s | 146 s | 0 | — |
+| qwen3_donna_s6 | 14,7 s | 139 | 6 / 0,55 / 0,89 s | 81 s | 0 | — |
+| qwen3_uomo_s2 | 28,5 s | 126 | 4 / 0,27 / 0,29 s | 162 s | 0 | — |
+| qwen3_uomo_s6 | 15,0 s | 136 | 2 / 0,59 / 0,62 s | 82 s | 0,06 | «dell'OMI» → «dell'om e» |
+| chatterbox_default_s2 | 20,2 s | 179 | 5 / 0,87 / 1,00 s | 101 s | 0,05 | un «ah» in più; «nel rogito» → «nell'orgito» |
+| chatterbox_default_s6 | 12,8 s | 160 | 3 / 0,58 / 0,97 s | 60 s | 0,03 | «dell'OMI» → «dell'omei» |
+| chatterbox_rif_donna_s2 | 23,7 s | 152 | 6 / 0,66 / 0,94 s | 124 s | 0,02 | «rogito» → «rugito» |
+| chatterbox_rif_donna_s6 | 13,1 s | 156 | 2 / 0,59 / 0,72 s | 60 s | 0 | — |
+| chatterbox_rif_uomo_s2 | 21,6 s | 166 | 6 / 0,75 / 1,00 s | 106 s | 0 | — |
+| chatterbox_rif_uomo_s6 | 13,0 s | 157 | 3 / 0,58 / 0,91 s | 60 s | 0,06 | «e stato» → «è stata» |
+| piper_serena_s2 | 17,6 s | 205 | 3 / 0,30 / 0,34 s | 3,6 s | 0 | — |
+| piper_serena_s6 | 11,8 s | 173 | 1 / 0,26 / 0,26 s | 2,3 s | 0,03 | «le» → «i» |
+| piper_paola_s2 | 16,6 s | 216 | 0 | 0,7 s | 0,05 | «prezzo» → «pezzo»; «nel rogito» → «nell'oggetto» |
+| piper_paola_s6 | 11,8 s | 172 | 0 | 0,5 s | 0,18 | «partenza», «Osservatorio», «Immobiliare», «Entrate» storpiate |
+| piper_riccardo_s2 | 18,8 s | 191 | 5 / 0,33 / 0,51 s | 0,5 s | 0,15 | più parole storpiate (es. «trattativa» → «tatta attiva») |
+| piper_riccardo_s6 | 12,6 s | 162 | 1 / 0,30 s | 0,3 s | 0,21 | «Osservatorio», «Agenzia delle Entrate» storpiate |
+| kokoro (4 file) | 12,7–20,1 s | 140–207 | vedi fase 1 precedente | 3–6 s | 0 | — |
 
-## Piper — perché manca
+Loudness misurata su tutti i file: tra -16,0 e -17,0 LUFS, picco ≤ -1,5 dBFS.
 
-- Le voci italiane ufficiali (`it_IT-paola-medium`, `it_IT-riccardo-x_low`) sono distribuite solo su Hugging Face (`rhasspy/piper-voices`), che la rete di questa sessione blocca (huggingface.co non raggiungibile). Non ho usato mirror non ufficiali.
-- Le licenze delle singole voci sono nelle `MODEL_CARD` su Hugging Face, quindi non le ho potute verificare. Restano "da verificare".
-- Nota: il pacchetto `piper-tts` attuale (OHF-Voice/piper1-gpl) è GPL-3.0. L'uso commerciale è consentito; gli obblighi GPL riguardano la redistribuzione del software, non l'audio generato.
+## Note tecniche per modello
 
-## Chatterbox Multilingual — perché manca
+**Qwen3-TTS VoiceDesign (Alibaba Qwen, Apache-2.0)**
+- Supporta ufficialmente l'italiano. Non ha voci italiane predefinite: la voce si "progetta" con una descrizione testuale (nei file: voce adulta, timbro caldo, tono calmo e rassicurante, ritmo moderato). Non clona nessuna persona reale.
+- Ritmo lento (126–139 parole al minuto): si può chiedere un ritmo più sostenuto nella descrizione.
+- Una voce progettata può variare leggermente da una generazione all'altra. In produzione la si fissa: si genera un campione di riferimento e poi si usa il modello Qwen3-TTS *Base* (stessa licenza) per ripetere sempre lo stesso timbro su tutte le scene.
+- Il più lento da generare: circa 5–6 s di calcolo per secondo di audio su CPU, quindi circa 25–30 minuti per l'intero modulo.
 
-- Il README ufficiale (resemble-ai/chatterbox, MIT) elenca **l'italiano (`it`)** tra le 23 lingue del modello multilingue.
-- I pesi (`ResembleAI/chatterbox`) sono solo su Hugging Face, bloccato come sopra. Serve anche PyTorch (~ qualche GB, solo CPU: generazione lenta).
-- Nota tecnica: ogni audio Chatterbox contiene un **watermark Perth** inudibile (rilevabile via software). Non impedisce l'uso commerciale, ma va saputo.
+**Chatterbox Multilingual V3 (Resemble AI, MIT)**
+- Supporta l'italiano. Non ha un pacchetto dedicato all'italiano (esistono solo per cinese, spagnolo, portoghese e hindi).
+- Ogni file contiene un **watermark Perth inudibile** (MIT), rilevabile via software. Non limita l'uso commerciale.
+- `default`: la voce integrata non è italiana; ho usato `cfg_weight = 0` come consiglia il README per non trasferire l'accento.
+- `rif_*`: timbro preso dai campioni Qwen3. Così la voce resta uguale in tutte le scene (utile in fase 2).
+- Il testo è generato frase per frase: le pause fino a 1 s comprendono i 0,35 s che ho inserito tra le frasi più il silenzio finale del modello. In fase 2 si regolano.
+- La parola «rogito» è a rischio in due varianti su tre: in fase 2 la si può scrivere in `testo_per_voce` in forma fonetica (es. «ròghito» o «ròʤito» a seconda del modello).
+- Nota d'installazione: il componente del watermark richiede `setuptools < 81` su Python 3.13; l'ho aggiunto (correzione d'installazione, il watermark resta attivo).
 
-## Google Cloud TTS / Azure TTS
+**Piper**
+- `serena` (high): nessun errore evidente, ma ritmo molto veloce (205 parole al minuto) e pause brevi. Dataset sintetico generato con Qwen3-TTS, licenza CC-BY-4.0: va citato.
+- `paola` e `riccardo`: varie parole storpiate e licenza non verificabile da qui (vedi `LICENZE.md`). Le sconsiglio.
 
-Non usati: servono credenziali tue (chiave API o account di servizio con quota gratuita). Se vuoi includerli, mandami le credenziali e ti indico come passarmele in modo sicuro (variabile d'ambiente della sessione, non in chat né nel repo).
+**"O-emme-i"**: letta bene da Qwen3 donna, Chatterbox con riferimenti, Kokoro, Piper serena; dubbia in Qwen3 uomo e Chatterbox default. Da ascoltare.
 
 ## Esclusi per licenza
 

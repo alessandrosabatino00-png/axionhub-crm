@@ -1,0 +1,134 @@
+{
+ "chatterbox_default_s2.wav": {
+  "wer": 0.05,
+  "differenze": [
+   "insert: «» → «ah»",
+   "replace: «nel rogito» → «nell'orgito»"
+  ],
+  "trascrizione": "Prima di tutto una distinzione che confonde molti.  Ah, il valore è quanto la casa vale per il mercato in questo momento.  Il prezzo di annuncio è quello che decidi di chiedere.  Il prezzo di vendita è quello che finisce scritto nell'orgito ed è l'unico che  conta davvero.  Spesso non coincidono tra annuncio e vendita c'è di mezzo la trattativa."
+ },
+ "chatterbox_default_s6.wav": {
+  "wer": 0.029,
+  "differenze": [
+   "replace: «dell'omi» → «dell'omei»"
+  ],
+  "trascrizione": "Un punto di partenza serio sono le quotazioni dell'OMEI, l'osservatorio del mercato immobiliare  dell'agenzia delle entrate.  Non danno il valore della tua casa, ma una fascia di riferimento per zona e stato  di conservazione."
+ },
+ "chatterbox_rif_donna_s2.wav": {
+  "wer": 0.017,
+  "differenze": [
+   "replace: «rogito» → «rugito»"
+  ],
+  "trascrizione": "Prima di tutto, una distinzione che confonde molti.  Il valore è quanto la casa vale per il mercato in questo momento.  Il prezzo di annuncio è quello che decidi di chiedere.  Il prezzo di vendita è quello che finisce scritto nel rugito ed è l'unico che conta  davvero.  Spesso non coincidono, tra annuncio e vendita c'è di mezzo la trattativa."
+ },
+ "chatterbox_rif_donna_s6.wav": {
+  "wer": 0.0,
+  "differenze": [],
+  "trascrizione": "Un punto di partenza serio sono le quotazioni dell'OMI, l'Osservatorio del Mercato Immobiliare  dell'Agenzia delle Entrate.  Non danno il valore della tua casa, ma una fascia di riferimento per zona e stato di  conservazione."
+ },
+ "chatterbox_rif_uomo_s2.wav": {
+  "wer": 0.0,
+  "differenze": [],
+  "trascrizione": "Prima di tutto, una distinzione che confonde molti.  Il valore è quanto la casa vale per il mercato in questo momento.  Il prezzo di annuncio è quello che decidi di chiedere.  Il prezzo di vendita è quello che finisce scritto nel rogito, ed è l'unico che  conta davvero.  Spesso non coincidono, tra annuncio e vendita c'è di mezzo la trattativa."
+ },
+ "chatterbox_rif_uomo_s6.wav": {
+  "wer": 0.059,
+  "differenze": [
+   "replace: «e stato» → «è stata»"
+  ],
+  "trascrizione": "Un punto di partenza serio sono le quotazioni dell'OMI, l'Osservatorio del Mercato Immobiliare dell'Agenzia delle Entrate.  Non danno il valore della tua casa, ma una fascia di riferimento per zona è stata di conservazione."
+ },
+ "kokoro_if_sara_s2.wav": {
+  "wer": 0.0,
+  "differenze": [],
+  "trascrizione": "Prima di tutto una distinzione che confonde molti.  Il valore è quanto la casa vale per il mercato in questo momento.  Il prezzo di annuncio è quello che decidi di chiedere.  Il prezzo di vendita è quello che finisce scritto nel rogito ed è l'unico che conta  davvero.  Spesso non coincidono, tra annuncio e vendita c'è di mezzo la trattativa."
+ },
+ "kokoro_if_sara_s6.wav": {
+  "wer": 0.0,
+  "differenze": [],
+  "trascrizione": "Un punto di partenza serio sono le quotazioni dell'OMI, l'Osservatorio del mercato immobiliare  dell'Agenzia delle Entrate, non danno il valore della tua casa, ma una fascia di riferimento  per zona e stato di conservazione."
+ },
+ "kokoro_im_nicola_s2.wav": {
+  "wer": 0.0,
+  "differenze": [],
+  "trascrizione": "Prima di tutto una distinzione che confonde molti. Il valore è quanto la casa vale per il mercato in questo momento.  Il prezzo di annuncio è quello che decidi di chiedere. Il prezzo di vendita è quello che finisce scritto nel rogito ed è l'unico che conta davvero.  Spesso non coincidono, tra annuncio e vendita c'è di mezzo la trattativa."
+ },
+ "kokoro_im_nicola_s6.wav": {
+  "wer": 0.0,
+  "differenze": [],
+  "trascrizione": "Un punto di partenza serio sono le quotazioni dell'OMI, l'Osservatorio del Mercato Immobiliare dell'Agenzia delle Entrate.  Non danno il valore della tua casa, ma una fascia di riferimento per zona e stato di conservazione."
+ },
+ "piper_paola_s2.wav": {
+  "wer": 0.05,
+  "differenze": [
+   "replace: «prezzo» → «pezzo»",
+   "replace: «nel rogito» → «nell'oggetto»"
+  ],
+  "trascrizione": "Prima di tutto, una distinzione che confonde molti.  Il valore è quanto la casa vale per il mercato in questo momento.  Il pezzo di annuncio è quello che decidi di chiedere.  Il prezzo di vendita è quello che finisce scritto nell'oggetto ed è l'unico che  conta davvero.  Spesso non coincidono, tra annuncio e vendita c'è di mezzo la trattativa."
+ },
+ "piper_paola_s6.wav": {
+  "wer": 0.176,
+  "differenze": [
+   "replace: «partenza» → «patenza»",
+   "replace: «l'osservatorio» → «lo servitorio»",
+   "replace: «immobiliare» → «immobiliere»",
+   "replace: «entrate» → «entate»",
+   "replace: «e» → «è»"
+  ],
+  "trascrizione": "Un punto di patenza serio sono le quotazioni dell'OMI, lo servitorio del mercato immobiliere  dell'Agenzia delle Entate.  Non danno il valore della tua casa, ma una fascia di riferimento per zona è stato di  conservazione."
+ },
+ "piper_riccardo_s2.wav": {
+  "wer": 0.15,
+  "differenze": [
+   "replace: «è» → «re»",
+   "replace: «vale per il mercato» → «va è perinneccato»",
+   "replace: «rogito» → «fogito»",
+   "replace: «tra» → «da»",
+   "replace: «trattativa» → «tatta attiva»"
+  ],
+  "trascrizione": "Prima di tutto una distinzione che confonde molti, il valore re quanto la casa va è perinneccato  in questo momento.  Il prezzo di annuncio è quello che decidi di chiedere, il prezzo di vendita è quello  che finisce scritto nel fogito ed è l'unico che conta davvero.  Spesso, non coincidono.  Da annuncio e vendita c'è di mezzo la tatta attiva."
+ },
+ "piper_riccardo_s6.wav": {
+  "wer": 0.206,
+  "differenze": [
+   "replace: «partenza» → «pattenza»",
+   "replace: «dell'omi l'osservatorio» → «dell'oma e lo servavorilo»",
+   "replace: «delle entrate» → «dell'encati»"
+  ],
+  "trascrizione": "Un punto di pattenza serio sono le quotazioni dell'OMA e lo servavorilo del mercato immobiliare  dell'agenzia dell'ENCATI, non danno il valore della tua casa, ma una fascia di riferimento  per zona e stato di conservazione."
+ },
+ "piper_serena_s2.wav": {
+  "wer": 0.0,
+  "differenze": [],
+  "trascrizione": "Prima di tutto, una distinzione che confonde molti.  Il valore è quanto la casa vale per il mercato in questo momento.  Il prezzo di annuncio è quello che decidi di chiedere.  Il prezzo di vendita è quello che finisce scritto nel rogito, ed è l'unico che  conta davvero.  Spesso non coincidono.  Tra annuncio e vendita c'è di mezzo la trattativa."
+ },
+ "piper_serena_s6.wav": {
+  "wer": 0.029,
+  "differenze": [
+   "replace: «le» → «i»"
+  ],
+  "trascrizione": "Un punto di partenza serio sono i quotazioni dell'OMI, l'osservatorio del mercato immobiliare  dell'Agenzia delle Entrate.  Non danno il valore della tua casa, ma una fascia di riferimento per zona e stato di  conservazione."
+ },
+ "qwen3_donna_s2.wav": {
+  "wer": 0.0,
+  "differenze": [],
+  "trascrizione": "Prima di tutto, una distinzione che confonde molti.  Il valore è quanto la casa vale per il mercato in questo momento.  Il prezzo di annuncio è quello che decidi di chiedere.  Il prezzo di vendita è quello che finisce scritto nel rogito.  Ed è l'unico che conta davvero.  Spesso non coincidono.  Tra annuncio e vendita c'è di mezzo la trattativa."
+ },
+ "qwen3_donna_s6.wav": {
+  "wer": 0.0,
+  "differenze": [],
+  "trascrizione": "Un punto di partenza serio sono le quotazioni dell'OMI, l'Osservatorio del Mercato Immobiliare  dell'Agenzia delle Entrate, non danno il valore della tua casa, ma una fascia di riferimento  per zona e stato di conservazione."
+ },
+ "qwen3_uomo_s2.wav": {
+  "wer": 0.0,
+  "differenze": [],
+  "trascrizione": "Prima di tutto, una distinzione che confonde molti. Il valore è quanto la casa vale per il mercato in questo momento.  Il prezzo di annuncio è quello che decidi di chiedere. Il prezzo di vendita è quello che finisce scritto nel rogito ed è l'unico che conta davvero.  Spesso non coincidono tra annuncio e vendita c'è di mezzo la trattativa."
+ },
+ "qwen3_uomo_s6.wav": {
+  "wer": 0.059,
+  "differenze": [
+   "replace: «dell'omi» → «dell'om e»"
+  ],
+  "trascrizione": "Un punto di partenza serio sono le quotazioni dell'OM e l'Osservatorio del mercato immobiliare  dell'Agenzia delle Entrate.  Non danno il valore della tua casa, ma una fascia di riferimento per zona e stato  di conservazione."
+ }
+}
